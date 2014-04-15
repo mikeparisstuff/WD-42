@@ -1,6 +1,7 @@
 #![feature(globs)]
 
 extern crate collections;
+extern crate http;
 
 use std::io::*;
 use collections::HashMap;
