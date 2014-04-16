@@ -2,6 +2,8 @@
 
 extern crate collections;
 extern crate http;
+use http::server::{Request, ResponseWriter};
+use http::headers;
 
 use std::io::*;
 use collections::HashMap;
@@ -11,6 +13,7 @@ mod response;
 
 // The basic Rust App to be exposed
 struct App {
+	// TODO: Change Request/Response objects to work with rust-http
 	getRoutes: ~HashMap<~str, fn(req: &request::Request, res: &response::Response)>,
 	postRoutes: ~HashMap<~str, fn(req: &request::Request, res: &response::Response)>,
 	putRoutes: ~HashMap<~str, fn(req: &request::Request, res: &response::Response)>,
