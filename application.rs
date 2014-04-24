@@ -14,48 +14,29 @@ mod response;
 // The basic Rust App to be exposed
 struct App {
 	// TODO: Change Request/Response objects to work with rust-http
-	getRoutes: ~HashMap<~str, fn(req: &request::Request, res: &response::Response)>,
-	postRoutes: ~HashMap<~str, fn(req: &request::Request, res: &response::Response)>,
-	putRoutes: ~HashMap<~str, fn(req: &request::Request, res: &response::Response)>,
-	delRoutes: ~HashMap<~str, fn(req: &request::Request, res: &response::Response)>
+	routes: ~HashMap<~str, fn(req: &request::Request, res: &response::Response)>,
+    port: ~u16
 }
 
 impl App {
-	fn new() -> App{
-
-		App {
-			getRoutes: ~HashMap::new(),
-			postRoutes: ~HashMap::new(),
-			putRoutes: ~HashMap::new(),
-			delRoutes: ~HashMap::new()
-		}
-	}
-
+    fn new() -> App {
+        App {
+            routes: ~HashMap::new(),
+            port: ~8080
+        }
+    }
 
 	/*
 	*	Setup routing functions
 	*/
 	// map a route string to a function to handle that route
-	fn get(&mut self, route : &str, function: fn(req: &request::Request, res: &response::Response) -> () ) -> () {
-		// Add this route -> function pair in our routing datastructure
-		self.getRoutes.find_or_insert(route.to_owned(), function);
+    fn setRoutes(&mut self, new_routes: ~HashMap<~str, fn(req: &request::Request, res: &response::Response)>) -> () {
+        self.routes = new_routes
+    }
 
-	}
-
-	fn post(&mut self, route: &str, function: fn(req: &request::Request, res: &response::Response) -> () ) -> () {
-		// Add this route -> function pair to our routing datastructure
-		self.postRoutes.find_or_insert(route.to_owned(), function);
-	}
-
-	fn put(&mut self, route: &str, function: fn(req: &request::Request, res: &response::Response) -> () ) -> () {
-		// Add this route -> function pair to our routing datastructure
-		self.putRoutes.find_or_insert(route.to_owned(), function);
-	}
-
-	fn del(&mut self, route: &str, function: fn(req: &request::Request, res: &response::Response) -> () ) -> () {
-		// Add this route -> function pair to our routing datastructure
-		self.delRoutes.find_or_insert(route.to_owned(), function);
-	}
+    fn setPort(&mut self, new_port: ~u16) {
+        self.port = new_port
+    }
 }
 
 fn main() {
