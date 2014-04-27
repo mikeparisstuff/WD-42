@@ -205,6 +205,9 @@ pub struct Request {
     /// The originating IP address of the request.
     pub remote_addr: Option<SocketAddr>,
 
+    // Set to true if this request is authenticated
+    pub is_authenticated: bool,
+
     /// The host name and IP address that the request was sent to; this must always be specified for
     /// HTTP/1.1 requests (or the request will be rejected), but for HTTP/1.0 requests the Host
     /// header was not defined, and so this field will probably be None in such cases.
@@ -233,6 +236,7 @@ pub struct Request {
 
 /// The URI (Request-URI in RFC 2616) as specified in the Status-Line of an HTTP request
 #[deriving(Eq)]
+#[deriving(Clone)]
 pub enum RequestUri {
     /// 'The asterisk "*" means that the request does not apply to a particular resource, but to the
     /// server itself, and is only allowed when the method used does not necessarily apply to a
@@ -302,6 +306,7 @@ impl Request {
 
         // Start out with dummy values
         let mut request = ~Request {
+            is_authenticated: false,
             remote_addr: buffer.stream.wrapped.peer_name().ok(),
             headers: ~headers::request::HeaderCollection::new(),
             body: ~"",

@@ -1,5 +1,6 @@
-use std::io::IoResult;
+use std::io::{IoResult, File, println, Open, Read};
 use std::io::net::tcp::TcpStream;
+use std::path::posix::Path;
 
 use buffer::BufferedStream;
 use server::Request;
@@ -25,17 +26,19 @@ pub struct ResponseWriter<'a> {
     pub request: &'a Request,
     pub headers: ~HeaderCollection,
     pub status: status::Status,
+    viewDirectory: ~str
 }
 
 impl<'a> ResponseWriter<'a> {
     /// Create a `ResponseWriter` writing to the specified location
-    pub fn new(writer: &'a mut BufferedStream<TcpStream>, request: &'a Request) -> ResponseWriter<'a> {
+    pub fn new(writer: &'a mut BufferedStream<TcpStream>, request: &'a Request, dir : ~str) -> ResponseWriter<'a> {
         ResponseWriter {
             writer: writer,
             headers_written: false,
             request: request,
             headers: ~HeaderCollection::new(),
             status: status::Ok,
+            viewDirectory: dir
         }
     }
 
@@ -55,6 +58,30 @@ impl<'a> ResponseWriter<'a> {
             self.write_headers()
         } else {
             Ok(())
+        }
+    }
+
+    pub fn sendFile(&mut self, filename : ~str) {
+        println("In Send File");
+        let mut path_to_file = Path::new(self.viewDirectory.clone());
+        println!("Looking at path before push: {}", path_to_file.display());
+        path_to_file.push(Path::new(filename));
+        println!("Checking if file exists at path: {}", path_to_file.display());
+        if path_to_file.exists() {
+            println("File Exists");
+            let mut file_reader= File::open_mode(&path_to_file, Open, Read).ok().unwrap();
+            let filesize = path_to_file.stat().ok().unwrap().size;
+            println!("Opening file of size: {}", filesize);
+            let mut remaining_bytes = filesize as uint;
+            while (remaining_bytes >= 4098) {
+                self.write(file_reader.read_exact(4098).ok().unwrap());
+                remaining_bytes -= 4098;
+            }
+            self.write(file_reader.read_exact(remaining_bytes).ok().unwrap());
+            self.finish_response();
+        } else {
+            println("File does not exist");
+            self.status = status::InternalServerError;
         }
     }
 

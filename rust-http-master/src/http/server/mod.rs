@@ -3,6 +3,7 @@ use std::io::net::ip::SocketAddr;
 use time::precise_time_ns;
 
 use std::io::net::tcp::TcpListener;
+use std::path::posix::Path;
 
 use buffer::BufferedStream;
 
@@ -54,6 +55,7 @@ pub trait Server: Send + Clone {
             };
             let child_perf_sender = perf_sender.clone();
             let child_self = self.clone();
+            let viewDir = config.viewDirectory.clone();
             spawn(proc() {
                 let mut time_start = time_start;
                 let mut stream = BufferedStream::new(stream);
@@ -62,7 +64,7 @@ pub trait Server: Send + Clone {
                     let time_spawned = precise_time_ns();
                     let (request, err_status) = Request::load(&mut stream);
                     let time_request_made = precise_time_ns();
-                    let mut response = ~ResponseWriter::new(&mut stream, request);
+                    let mut response = ~ResponseWriter::new(&mut stream, request, viewDir);
                     let time_response_made = precise_time_ns();
                     match err_status {
                         Ok(()) => {
@@ -120,6 +122,7 @@ pub trait Server: Send + Clone {
 /// options may turn up later.
 pub struct Config {
 	pub bind_address: SocketAddr,
+    pub viewDirectory: ~str
 }
 
 static PERF_DUMP_FREQUENCY : u64 = 10_000;
