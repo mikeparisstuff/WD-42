@@ -82,6 +82,8 @@ impl<'a> ResponseWriter<'a> {
         } else {
             println("File does not exist");
             self.status = status::InternalServerError;
+            self.write(bytes!("<html><body><h1>404 Page Not Found</h1></body></html>"));
+            println("Send error");
         }
     }
 

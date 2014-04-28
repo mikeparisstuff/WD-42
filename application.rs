@@ -137,6 +137,7 @@ impl Server for App {
                         w.sendFile(path.slice_from(1).to_owned());
                     } else {
                         w.status = MethodNotAllowed;
+                        w.write(bytes!("Page not found"));
                     }
                 }
             },
@@ -148,6 +149,7 @@ impl Server for App {
                     (*v)(r, w);
                 } else {
                     w.status = MethodNotAllowed;
+                    w.write(bytes!("Page not found"));
                 }
             },
             (&Put, AbsolutePath(p)) => {
@@ -158,6 +160,7 @@ impl Server for App {
                     (*v)(r, w);
                 } else {
                     w.status = MethodNotAllowed;
+                    w.write(bytes!("Page not found"));
                 }
             },
             (&Delete, AbsolutePath(p)) => {
@@ -168,6 +171,7 @@ impl Server for App {
                     (*v)(r, w);
                 } else {
                     w.status = MethodNotAllowed;
+                    w.write(bytes!("Page not found"));
                 }
             },
             (_, _) => {
