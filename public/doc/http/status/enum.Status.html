@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>http::status::Status - Rust</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700|Inconsolata:400,700'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+</head>
+<body>
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <section class="sidebar">
+        
+
+        <p class='location'><a href='../index.html'>http</a>&#8203;::<a href='index.html'>status</a></p><div class='block enum'><h2>Enums</h2><a class='enum current' href='enum.Status.html'>Status</a><br/></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <button class="do-search">Search</button>
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Search documentation..."
+                       type="search" />
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content enum"><a class='source'
+                              href='../../src/http/rust-http-master/src/http/generated/status.rs.html#8-84'>[src]</a><h1 class='fqn'>Enum <a href='../index.html'>http</a>::<a href='index.html'>status</a>::<a class='enum' href=''>Status</a></h1><pre class='rust enum'>pub enum Status {
+    Continue,
+    SwitchingProtocols,
+    Processing,
+    Ok,
+    Created,
+    Accepted,
+    NonAuthoritativeInformation,
+    NoContent,
+    ResetContent,
+    PartialContent,
+    MultiStatus,
+    AlreadyReported,
+    ImUsed,
+    MultipleChoices,
+    MovedPermanently,
+    Found,
+    SeeOther,
+    NotModified,
+    UseProxy,
+    SwitchProxy,
+    TemporaryRedirect,
+    PermanentRedirect,
+    BadRequest,
+    Unauthorized,
+    PaymentRequired,
+    Forbidden,
+    NotFound,
+    MethodNotAllowed,
+    NotAcceptable,
+    ProxyAuthenticationRequired,
+    RequestTimeout,
+    Conflict,
+    Gone,
+    LengthRequired,
+    PreconditionFailed,
+    RequestEntityTooLarge,
+    RequestUriTooLong,
+    UnsupportedMediaType,
+    RequestedRangeNotSatisfiable,
+    ExpectationFailed,
+    ImATeapot,
+    AuthenticationTimeout,
+    UnprocessableEntity,
+    Locked,
+    FailedDependency,
+    MethodFailure,
+    UnorderedCollection,
+    UpgradeRequired,
+    PreconditionRequired,
+    TooManyRequests,
+    RequestHeaderFieldsTooLarge,
+    UnavailableForLegalReasons,
+    InternalServerError,
+    NotImplemented,
+    BadGateway,
+    ServiceUnavailable,
+    GatewayTimeout,
+    HttpVersionNotSupported,
+    VariantAlsoNegotiates,
+    InsufficientStorage,
+    LoopDetected,
+    NotExtended,
+    NetworkAuthenticationRequired,
+    UnregisteredStatus(u16, ~str),
+}</pre><div class='docblock'><p>HTTP status code</p>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.Continue'><code>Continue</code></td><td></td></tr><tr><td id='variant.SwitchingProtocols'><code>SwitchingProtocols</code></td><td></td></tr><tr><td id='variant.Processing'><code>Processing</code></td><td></td></tr><tr><td id='variant.Ok'><code>Ok</code></td><td></td></tr><tr><td id='variant.Created'><code>Created</code></td><td></td></tr><tr><td id='variant.Accepted'><code>Accepted</code></td><td></td></tr><tr><td id='variant.NonAuthoritativeInformation'><code>NonAuthoritativeInformation</code></td><td></td></tr><tr><td id='variant.NoContent'><code>NoContent</code></td><td></td></tr><tr><td id='variant.ResetContent'><code>ResetContent</code></td><td></td></tr><tr><td id='variant.PartialContent'><code>PartialContent</code></td><td></td></tr><tr><td id='variant.MultiStatus'><code>MultiStatus</code></td><td></td></tr><tr><td id='variant.AlreadyReported'><code>AlreadyReported</code></td><td></td></tr><tr><td id='variant.ImUsed'><code>ImUsed</code></td><td></td></tr><tr><td id='variant.MultipleChoices'><code>MultipleChoices</code></td><td></td></tr><tr><td id='variant.MovedPermanently'><code>MovedPermanently</code></td><td></td></tr><tr><td id='variant.Found'><code>Found</code></td><td></td></tr><tr><td id='variant.SeeOther'><code>SeeOther</code></td><td></td></tr><tr><td id='variant.NotModified'><code>NotModified</code></td><td></td></tr><tr><td id='variant.UseProxy'><code>UseProxy</code></td><td></td></tr><tr><td id='variant.SwitchProxy'><code>SwitchProxy</code></td><td></td></tr><tr><td id='variant.TemporaryRedirect'><code>TemporaryRedirect</code></td><td></td></tr><tr><td id='variant.PermanentRedirect'><code>PermanentRedirect</code></td><td></td></tr><tr><td id='variant.BadRequest'><code>BadRequest</code></td><td></td></tr><tr><td id='variant.Unauthorized'><code>Unauthorized</code></td><td></td></tr><tr><td id='variant.PaymentRequired'><code>PaymentRequired</code></td><td></td></tr><tr><td id='variant.Forbidden'><code>Forbidden</code></td><td></td></tr><tr><td id='variant.NotFound'><code>NotFound</code></td><td></td></tr><tr><td id='variant.MethodNotAllowed'><code>MethodNotAllowed</code></td><td></td></tr><tr><td id='variant.NotAcceptable'><code>NotAcceptable</code></td><td></td></tr><tr><td id='variant.ProxyAuthenticationRequired'><code>ProxyAuthenticationRequired</code></td><td></td></tr><tr><td id='variant.RequestTimeout'><code>RequestTimeout</code></td><td></td></tr><tr><td id='variant.Conflict'><code>Conflict</code></td><td></td></tr><tr><td id='variant.Gone'><code>Gone</code></td><td></td></tr><tr><td id='variant.LengthRequired'><code>LengthRequired</code></td><td></td></tr><tr><td id='variant.PreconditionFailed'><code>PreconditionFailed</code></td><td></td></tr><tr><td id='variant.RequestEntityTooLarge'><code>RequestEntityTooLarge</code></td><td></td></tr><tr><td id='variant.RequestUriTooLong'><code>RequestUriTooLong</code></td><td></td></tr><tr><td id='variant.UnsupportedMediaType'><code>UnsupportedMediaType</code></td><td></td></tr><tr><td id='variant.RequestedRangeNotSatisfiable'><code>RequestedRangeNotSatisfiable</code></td><td></td></tr><tr><td id='variant.ExpectationFailed'><code>ExpectationFailed</code></td><td></td></tr><tr><td id='variant.ImATeapot'><code>ImATeapot</code></td><td></td></tr><tr><td id='variant.AuthenticationTimeout'><code>AuthenticationTimeout</code></td><td></td></tr><tr><td id='variant.UnprocessableEntity'><code>UnprocessableEntity</code></td><td></td></tr><tr><td id='variant.Locked'><code>Locked</code></td><td></td></tr><tr><td id='variant.FailedDependency'><code>FailedDependency</code></td><td></td></tr><tr><td id='variant.MethodFailure'><code>MethodFailure</code></td><td></td></tr><tr><td id='variant.UnorderedCollection'><code>UnorderedCollection</code></td><td></td></tr><tr><td id='variant.UpgradeRequired'><code>UpgradeRequired</code></td><td></td></tr><tr><td id='variant.PreconditionRequired'><code>PreconditionRequired</code></td><td></td></tr><tr><td id='variant.TooManyRequests'><code>TooManyRequests</code></td><td></td></tr><tr><td id='variant.RequestHeaderFieldsTooLarge'><code>RequestHeaderFieldsTooLarge</code></td><td></td></tr><tr><td id='variant.UnavailableForLegalReasons'><code>UnavailableForLegalReasons</code></td><td></td></tr><tr><td id='variant.InternalServerError'><code>InternalServerError</code></td><td></td></tr><tr><td id='variant.NotImplemented'><code>NotImplemented</code></td><td></td></tr><tr><td id='variant.BadGateway'><code>BadGateway</code></td><td></td></tr><tr><td id='variant.ServiceUnavailable'><code>ServiceUnavailable</code></td><td></td></tr><tr><td id='variant.GatewayTimeout'><code>GatewayTimeout</code></td><td></td></tr><tr><td id='variant.HttpVersionNotSupported'><code>HttpVersionNotSupported</code></td><td></td></tr><tr><td id='variant.VariantAlsoNegotiates'><code>VariantAlsoNegotiates</code></td><td></td></tr><tr><td id='variant.InsufficientStorage'><code>InsufficientStorage</code></td><td></td></tr><tr><td id='variant.LoopDetected'><code>LoopDetected</code></td><td></td></tr><tr><td id='variant.NotExtended'><code>NotExtended</code></td><td></td></tr><tr><td id='variant.NetworkAuthenticationRequired'><code>NetworkAuthenticationRequired</code></td><td></td></tr><tr><td id='variant.UnregisteredStatus'><code>UnregisteredStatus</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a></code></h3><div class='methods'><h4 id='method.code' class='method'><code>fn <a href='#method.code' class='fnname'>code</a>(&amp;self) -&gt; u16</code></h4>
+<div class='docblock'><p>Get the status code</p>
+</div><h4 id='method.reason' class='method'><code>fn <a href='#method.reason' class='fnname'>reason</a>(&amp;self) -&gt; ~str</code></h4>
+<div class='docblock'><p>Get the reason phrase</p>
+</div><h4 id='method.from_code_and_reason' class='method'><code>fn <a href='#method.from_code_and_reason' class='fnname'>from_code_and_reason</a>(status: u16, reason: ~str) -&gt; <a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a></code></h4>
+<div class='docblock'><p>Get a status from the code and reason</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://static.rust-lang.org/doc/master/std/fmt/trait.Show.html' title='std::fmt::Show'>Show</a> for <a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a></code></h3><div class='methods'><h4 id='method.fmt' class='method'><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://static.rust-lang.org/doc/master/std/fmt/struct.Formatter.html' title='std::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/fmt/enum.Result.html' title='std::fmt::Result'>Result</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://static.rust-lang.org/doc/master/std/fmt/trait.Unsigned.html' title='std::fmt::Unsigned'>Unsigned</a> for <a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a></code></h3><div class='methods'><h4 id='method.fmt' class='method'><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://static.rust-lang.org/doc/master/std/fmt/struct.Formatter.html' title='std::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/fmt/enum.Result.html' title='std::fmt::Result'>Result</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://static.rust-lang.org/doc/master/std/num/trait.ToPrimitive.html' title='std::num::ToPrimitive'>ToPrimitive</a> for <a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a></code></h3><div class='methods'><h4 id='method.to_i64' class='method'><code>fn <a href='#method.to_i64' class='fnname'>to_i64</a>(&amp;self) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;i64&gt;</code></h4>
+<div class='docblock'><p>Equivalent to <code>Some(self.code() as i64)</code></p>
+</div><h4 id='method.to_u64' class='method'><code>fn <a href='#method.to_u64' class='fnname'>to_u64</a>(&amp;self) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;u64&gt;</code></h4>
+<div class='docblock'><p>Equivalent to <code>Some(self.code() as u64)</code></p>
+</div></div><h3 class='impl'><code>impl <a class='trait' href='http://static.rust-lang.org/doc/master/std/num/trait.FromPrimitive.html' title='std::num::FromPrimitive'>FromPrimitive</a> for <a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a></code></h3><div class='methods'><h4 id='method.from_i64' class='method'><code>fn <a href='#method.from_i64' class='fnname'>from_i64</a>(n: i64) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a>&gt;</code></h4>
+<div class='docblock'><p>Get a <em>registered</em> status code from the number of its status code.</p>
+
+<p>This will return None if an unknown (or negative, which are invalid) code is passed.</p>
+
+<p>For example, <code>from_i64(200)</code> will return <code>OK</code>.</p>
+</div><h4 id='method.from_u64' class='method'><code>fn <a href='#method.from_u64' class='fnname'>from_u64</a>(n: u64) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a>&gt;</code></h4>
+<div class='docblock'><p>Get a <em>registered</em> status code from the number of its status code.</p>
+
+<p>This will return None if an unknown code is passed.</p>
+
+<p>For example, <code>from_u64(200)</code> will return <code>OK</code>.</p>
+</div></div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://static.rust-lang.org/doc/master/std/clone/trait.Clone.html' title='std::clone::Clone'>Clone</a> for <a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a></code></h3><div class='methods'><h4 id='method.clone' class='method'><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://static.rust-lang.org/doc/master/std/cmp/trait.Eq.html' title='std::cmp::Eq'>Eq</a> for <a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a></code></h3><div class='methods'><h4 id='method.eq' class='method'><code>fn <a href='#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a>) -&gt; bool</code></h4>
+<h4 id='method.ne' class='method'><code>fn <a href='#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../http/status/enum.Status.html' title='http::status::Status'>Status</a>) -&gt; bool</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&uarr;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&darr;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code> (or <code>str</code>), <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    <script>
+        var rootPath = "../../";
+        var currentCrate = "http";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

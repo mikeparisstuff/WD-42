@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>http::client::response::ResponseReader - Rust</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700|Inconsolata:400,700'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+
+    
+</head>
+<body>
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <section class="sidebar">
+        
+
+        <p class='location'><a href='../../index.html'>http</a>&#8203;::<a href='../index.html'>client</a>&#8203;::<a href='index.html'>response</a></p><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.ResponseReader.html'>ResponseReader</a><br/></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <button class="do-search">Search</button>
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Search documentation..."
+                       type="search" />
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct"><a class='source'
+                              href='../../../src/http/rust-http-master/src/http/client/response.rs.html#12-26'>[src]</a><h1 class='fqn'>Struct <a href='../../index.html'>http</a>::<a href='../index.html'>client</a>::<a href='index.html'>response</a>::<a class='struct' href=''>ResponseReader</a></h1><pre class='rust struct'>pub struct ResponseReader&lt;S&gt; {
+    stream: <a class='struct' href='../../../http/buffer/struct.BufferedStream.html' title='http::buffer::BufferedStream'>BufferedStream</a>&lt;S&gt;,
+    pub request: <a class='struct' href='../../../http/client/request/struct.RequestWriter.html' title='http::client::request::RequestWriter'>RequestWriter</a>&lt;S&gt;,
+    pub version: (uint, uint),
+    pub status: <a class='enum' href='../../../http/status/enum.Status.html' title='http::status::Status'>Status</a>,
+    pub headers: ~<a class='struct' href='../../../http/headers/response/struct.HeaderCollection.html' title='http::headers::response::HeaderCollection'>HeaderCollection</a>,
+}</pre><h2 class='fields'>Fields</h2>
+<table><tr><td id='structfield.stream'><code>stream</code></td><td></td></tr><tr><td id='structfield.request'><code>request</code></td><td><div class='docblock'><p>The request which this is a response to</p>
+</div></td></tr><tr><td id='structfield.version'><code>version</code></td><td><div class='docblock'><p>The HTTP version number; typically <code>(1, 1)</code> or, less commonly, <code>(1, 0)</code>.</p>
+</div></td></tr><tr><td id='structfield.status'><code>status</code></td><td><div class='docblock'><p>The HTTP status indicated in the response.</p>
+</div></td></tr><tr><td id='structfield.headers'><code>headers</code></td><td><div class='docblock'><p>The headers received in the response.</p>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;S: <a class='trait' href='http://static.rust-lang.org/doc/master/std/io/trait.Stream.html' title='std::io::Stream'>Stream</a>&gt; <a class='struct' href='../../../http/client/response/struct.ResponseReader.html' title='http::client::response::ResponseReader'>ResponseReader</a>&lt;S&gt;</code></h3><div class='methods'><h4 id='method.construct' class='method'><code>fn <a href='#method.construct' class='fnname'>construct</a>(stream: <a class='struct' href='../../../http/buffer/struct.BufferedStream.html' title='http::buffer::BufferedStream'>BufferedStream</a>&lt;S&gt;, request: <a class='struct' href='../../../http/client/request/struct.RequestWriter.html' title='http::client::request::RequestWriter'>RequestWriter</a>&lt;S&gt;) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/result/enum.Result.html' title='std::result::Result'>Result</a>&lt;<a class='struct' href='../../../http/client/response/struct.ResponseReader.html' title='http::client::response::ResponseReader'>ResponseReader</a>&lt;S&gt;, (<a class='struct' href='../../../http/client/request/struct.RequestWriter.html' title='http::client::request::RequestWriter'>RequestWriter</a>&lt;S&gt;, <a class='struct' href='http://static.rust-lang.org/doc/master/std/io/struct.IoError.html' title='std::io::IoError'>IoError</a>)&gt;</code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;S: <a class='trait' href='http://static.rust-lang.org/doc/master/std/io/trait.Stream.html' title='std::io::Stream'>Stream</a>&gt; <a class='trait' href='http://static.rust-lang.org/doc/master/std/io/trait.Reader.html' title='std::io::Reader'>Reader</a> for <a class='struct' href='../../../http/client/response/struct.ResponseReader.html' title='http::client::response::ResponseReader'>ResponseReader</a>&lt;S&gt;</code></h3><div class='methods'><h4 id='method.read' class='method'><code>fn <a href='#method.read' class='fnname'>read</a>(&amp;mut self, buf: &amp;mut [u8]) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;uint&gt;</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&uarr;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&darr;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code> (or <code>str</code>), <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    <script>
+        var rootPath = "../../../";
+        var currentCrate = "http";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    <script async src="../../../search-index.js"></script>
+</body>
+</html>

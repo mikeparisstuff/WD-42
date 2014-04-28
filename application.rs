@@ -1,3 +1,13 @@
+#![crate_id = "application"]
+#![crate_type="lib"]
+
+//! The main WD-42 application.
+//!
+//! The majority of the interface that you as a user will see is exposed
+//! via this Application module and includes activities such as
+//! registering request handlers, applying middleware functions, and setting
+//! configuration variables.
+
 #![feature(globs)]
 
 extern crate collections;
@@ -19,19 +29,32 @@ use collections::HashMap;
 
 // The basic Rust App to be exposed
 
+/// The Application struct. The meat of the WD-42 Framework
 #[deriving(Clone)]
 pub struct App {
-	// TODO: Change Request/Response objects to work with rust-http
+	/// The root directory for your static files including html, css, and js files.
     viewDirectory: Path,
+    /// The data structure to hold your get routes and get request handlers.
+    /// Users should not interact with this directly and should use App::get() instead.
 	getRoutes: ~HashMap<~str, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)>,
+    /// The data structure to hold your put routes and put request handlers.
+    /// Users should not interact with this directly and should use App::put() instead.
     putRoutes: ~HashMap<~str, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)>,
+    /// The data structure to hold your post routes and post request handlers.
+    /// Users should not interact with this directly and should use App::post() instead.
     postRoutes: ~HashMap<~str, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)>,
+    /// The data structure to hold your del routes and del request handlers.
+    /// Users should not interact with this directly and should use App::del() instead.
     delRoutes: ~HashMap<~str, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)>,
+    /// The data structure to hold the applied middleware functions.  Add a function to this list using App::apply()
     middlewareStack: ~Vec<fn(&mut http::server::request::Request)>,
+    /// The port that your server will be listening on
     port: u16
 }
 
 impl App {
+
+    /// Create a new Application.
     pub fn new() -> App {
         App {
             viewDirectory: os::getcwd(),
@@ -44,31 +67,30 @@ impl App {
         }
     }
 
-	/*
-	*	Setup routing functions
-	*/
-	// map a route string to a function to handle that route
-    // pub fn setRoutes(&mut self, new_routes: ~HashMap<~str, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)>) -> () {
-    //     self.routes = new_routes
-    // }
-
+    /// Set the port to be listened on
     pub fn setPort(&mut self, new_port: u16) {
         self.port = new_port
     }
 
+    /// Supply a port to listen on and actually start the WD-42 server.
     pub fn listen(&mut self, port : u16) {
         self.setPort(port);
         let s = self.clone();
         s.serve_forever();
     }
 
+    /// Add a middleware function to the middleware stack to be run on the
+    /// Request objects before reaching your request handlers.
+    ///
+    /// This is often an ideal place to put authentication logic as well as
+    /// light analytics tracking.
     pub fn apply(&mut self, f : fn(&mut http::server::request::Request)) {
         println!("Adding function to middleware");
         self.middlewareStack.push(f);
     }
-    /*
-    *   Interface for user to send html and other files
-    */
+
+
+    /// Set the root public directory where you will place your html, css, and js files
     pub fn set_public_dir(&mut self, path_to_dir: &str) {
         println!("CWD: {}", os::getcwd().display());
         println!("Rel Path: {}", Path::new(path_to_dir).display());
@@ -76,29 +98,24 @@ impl App {
         println!("Total path: {}", self.viewDirectory.display());
     }
 
-    /*
-    *   Helper resource that looks for css and js files that may be requested
-    */
-    fn isPublicResource(self, resource_uri : &str) -> bool {
-        let path = self.viewDirectory.join(Path::new(resource_uri));
-        path.exists()
-    }
-
-    /*
-    *   Interface for user to connect functions to handle different HTTP methods at different endpoints
-    */
+    /// Add a GET route and GET request handler for that route to the application.
+    /// app.get("/", indexGet) will register the indexGet function to be called whenever
+    /// the server sees a get request to the route "/"
     pub fn get(&mut self, route : ~str, f : fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)) {
         self.getRoutes.insert(route, f);
     }
 
+    /// The same as app.get() except for post requests
     pub fn post(&mut self, route : ~str, f : fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)) {
         self.postRoutes.insert(route, f);
     }
 
+    /// The same as app.get() except for put requests
     pub fn put(&mut self, route : ~str, f : fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)) {
         self.putRoutes.insert(route, f);
     }
 
+    /// The same as app.get() except for del requests
     pub fn del(&mut self, route : ~str, f : fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)) {
         self.delRoutes.insert(route, f);
     }

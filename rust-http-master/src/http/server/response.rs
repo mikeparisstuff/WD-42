@@ -61,6 +61,9 @@ impl<'a> ResponseWriter<'a> {
         }
     }
 
+    /// Send a file by supplying the relative path from the applications public directory.
+    /// i.e. if the public directory is /public and we call sendFile(~"index.html")
+    /// this would look for /public/index.html from the root project directory
     pub fn sendFile(&mut self, filename : ~str) {
         println("In Send File");
         let mut path_to_file = self.viewDirectory.clone();

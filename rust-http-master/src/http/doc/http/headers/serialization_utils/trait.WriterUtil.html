@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>http::headers::serialization_utils::WriterUtil - Rust</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700|Inconsolata:400,700'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+
+    
+</head>
+<body>
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <section class="sidebar">
+        
+
+        <p class='location'><a href='../../index.html'>http</a>&#8203;::<a href='../index.html'>headers</a>&#8203;::<a href='index.html'>serialization_utils</a></p><div class='block trait'><h2>Traits</h2><a class='trait current' href='trait.WriterUtil.html'>WriterUtil</a><br/></div><div class='block fn'><h2>Functions</h2><a class='fn ' href='fn.comma_join.html'>comma_join</a><br/><a class='fn ' href='fn.comma_split.html'>comma_split</a><br/><a class='fn ' href='fn.comma_split_iter.html'>comma_split_iter</a><br/><a class='fn ' href='fn.maybe_quoted_string.html'>maybe_quoted_string</a><br/><a class='fn ' href='fn.maybe_unquote_string.html'>maybe_unquote_string</a><br/><a class='fn ' href='fn.normalise_header_name.html'>normalise_header_name</a><br/><a class='fn ' href='fn.push_maybe_quoted_string.html'>push_maybe_quoted_string</a><br/><a class='fn ' href='fn.push_parameter.html'>push_parameter</a><br/><a class='fn ' href='fn.push_parameters.html'>push_parameters</a><br/><a class='fn ' href='fn.push_quality.html'>push_quality</a><br/><a class='fn ' href='fn.push_quoted_string.html'>push_quoted_string</a><br/><a class='fn ' href='fn.quoted_string.html'>quoted_string</a><br/><a class='fn ' href='fn.unquote_string.html'>unquote_string</a><br/></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <button class="do-search">Search</button>
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Search documentation..."
+                       type="search" />
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content trait"><a class='source'
+                              href='../../../src/http/headers/serialization_utils.rs.html#57-104'>[src]</a><h1 class='fqn'>Trait <a href='../../index.html'>http</a>::<a href='../index.html'>headers</a>::<a href='index.html'>serialization_utils</a>::<a class='trait' href=''>WriterUtil</a></h1><pre class='rust trait'>pub trait WriterUtil: <a class='trait' href='http://static.rust-lang.org/doc/master/std/io/trait.Writer.html' title='std::io::Writer'>Writer</a> {
+    fn <a href='#method.write_maybe_quoted_string' class='fnname'>write_maybe_quoted_string</a>(&amp;mut self, s: &amp;str) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt; { ... }
+    fn <a href='#method.write_quoted_string' class='fnname'>write_quoted_string</a>(&amp;mut self, s: &amp;str) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt; { ... }
+    fn <a href='#method.write_parameter' class='fnname'>write_parameter</a>(&amp;mut self, k: &amp;str, v: &amp;str) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt; { ... }
+    fn <a href='#method.write_parameters' class='fnname'>write_parameters</a>&lt;K: <a class='trait' href='http://static.rust-lang.org/doc/master/std/str/trait.Str.html' title='std::str::Str'>Str</a>, V: <a class='trait' href='http://static.rust-lang.org/doc/master/std/str/trait.Str.html' title='std::str::Str'>Str</a>&gt;(&amp;mut self, parameters: &amp;[(K, V)]) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt; { ... }
+    fn <a href='#method.write_quality' class='fnname'>write_quality</a>(&amp;mut self, quality: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;f64&gt;) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt; { ... }
+    fn <a href='#method.write_token' class='fnname'>write_token</a>(&amp;mut self, token: &amp;str) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt; { ... }
+}</pre>
+            <h2 id='provided-methods'>Provided Methods</h2>
+            <div class='methods'>
+        <h3 id='method.write_maybe_quoted_string' class='method'><code>fn <a href='#method.write_maybe_quoted_string' class='fnname'>write_maybe_quoted_string</a>(&amp;mut self, s: &amp;str) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h3><h3 id='method.write_quoted_string' class='method'><code>fn <a href='#method.write_quoted_string' class='fnname'>write_quoted_string</a>(&amp;mut self, s: &amp;str) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h3><h3 id='method.write_parameter' class='method'><code>fn <a href='#method.write_parameter' class='fnname'>write_parameter</a>(&amp;mut self, k: &amp;str, v: &amp;str) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h3><h3 id='method.write_parameters' class='method'><code>fn <a href='#method.write_parameters' class='fnname'>write_parameters</a>&lt;K: <a class='trait' href='http://static.rust-lang.org/doc/master/std/str/trait.Str.html' title='std::str::Str'>Str</a>, V: <a class='trait' href='http://static.rust-lang.org/doc/master/std/str/trait.Str.html' title='std::str::Str'>Str</a>&gt;(&amp;mut self, parameters: &amp;[(K, V)]) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h3><h3 id='method.write_quality' class='method'><code>fn <a href='#method.write_quality' class='fnname'>write_quality</a>(&amp;mut self, quality: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;f64&gt;) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h3><h3 id='method.write_token' class='method'><code>fn <a href='#method.write_token' class='fnname'>write_token</a>(&amp;mut self, token: &amp;str) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h3></div>
+                    <h2 id='implementors'>Implementors</h2>
+                    <ul class='item-list'>
+                <li><code>impl&lt;W: <a class='trait' href='http://static.rust-lang.org/doc/master/std/io/trait.Writer.html' title='std::io::Writer'>Writer</a>&gt; <a class='trait' href='../../../http/headers/serialization_utils/trait.WriterUtil.html' title='http::headers::serialization_utils::WriterUtil'>WriterUtil</a> for W</code></li></ul></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&uarr;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&darr;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code> (or <code>str</code>), <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    <script>
+        var rootPath = "../../../";
+        var currentCrate = "http";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    <script async src="../../../search-index.js"></script>
+</body>
+</html>

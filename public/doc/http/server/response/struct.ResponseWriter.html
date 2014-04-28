@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>http::server::response::ResponseWriter - Rust</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700|Inconsolata:400,700'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+
+    
+</head>
+<body>
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <section class="sidebar">
+        
+
+        <p class='location'><a href='../../index.html'>http</a>&#8203;::<a href='../index.html'>server</a>&#8203;::<a href='index.html'>response</a></p><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.ResponseWriter.html'>ResponseWriter</a><br/></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <button class="do-search">Search</button>
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Search documentation..."
+                       type="search" />
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct"><a class='source'
+                              href='../../../src/http/rust-http-master/src/http/server/response.rs.html#22-30'>[src]</a><h1 class='fqn'>Struct <a href='../../index.html'>http</a>::<a href='../index.html'>server</a>::<a href='index.html'>response</a>::<a class='struct' href=''>ResponseWriter</a></h1><pre class='rust struct'>pub struct ResponseWriter&lt;'a&gt; {
+    writer: &amp;'a mut <a class='struct' href='../../../http/buffer/struct.BufferedStream.html' title='http::buffer::BufferedStream'>BufferedStream</a>&lt;<a class='struct' href='http://static.rust-lang.org/doc/master/std/io/net/tcp/struct.TcpStream.html' title='std::io::net::tcp::TcpStream'>TcpStream</a>&gt;,
+    headers_written: bool,
+    pub request: &amp;'a <a class='struct' href='../../../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>,
+    pub headers: ~<a class='struct' href='../../../http/headers/response/struct.HeaderCollection.html' title='http::headers::response::HeaderCollection'>HeaderCollection</a>,
+    pub status: <a class='enum' href='../../../http/status/enum.Status.html' title='http::status::Status'>Status</a>,
+    viewDirectory: <a class='struct' href='http://static.rust-lang.org/doc/master/std/path/posix/struct.Path.html' title='std::path::posix::Path'>Path</a>,
+}</pre><h2 class='fields'>Fields</h2>
+<table><tr><td id='structfield.writer'><code>writer</code></td><td></td></tr><tr><td id='structfield.headers_written'><code>headers_written</code></td><td></td></tr><tr><td id='structfield.request'><code>request</code></td><td></td></tr><tr><td id='structfield.headers'><code>headers</code></td><td></td></tr><tr><td id='structfield.status'><code>status</code></td><td></td></tr><tr><td id='structfield.viewDirectory'><code>viewDirectory</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../../../http/server/response/struct.ResponseWriter.html' title='http::server::response::ResponseWriter'>ResponseWriter</a>&lt;'a&gt;</code></h3><div class='methods'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(writer: &amp;'a mut <a class='struct' href='../../../http/buffer/struct.BufferedStream.html' title='http::buffer::BufferedStream'>BufferedStream</a>&lt;<a class='struct' href='http://static.rust-lang.org/doc/master/std/io/net/tcp/struct.TcpStream.html' title='std::io::net::tcp::TcpStream'>TcpStream</a>&gt;, request: &amp;'a <a class='struct' href='../../../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>, dir: <a class='struct' href='http://static.rust-lang.org/doc/master/std/path/posix/struct.Path.html' title='std::path::posix::Path'>Path</a>) -&gt; <a class='struct' href='../../../http/server/response/struct.ResponseWriter.html' title='http::server::response::ResponseWriter'>ResponseWriter</a>&lt;'a&gt;</code></h4>
+<div class='docblock'><p>Create a <code>ResponseWriter</code> writing to the specified location</p>
+</div><h4 id='method.write_content_auto' class='method'><code>fn <a href='#method.write_content_auto' class='fnname'>write_content_auto</a>(&amp;mut self, content_type: <a class='struct' href='../../../http/headers/content_type/struct.MediaType.html' title='http::headers::content_type::MediaType'>MediaType</a>, content: ~str) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h4>
+<div class='docblock'><p>Write a response with the specified Content-Type and content; the Content-Length header is
+set based upon the contents</p>
+</div><h4 id='method.try_write_headers' class='method'><code>fn <a href='#method.try_write_headers' class='fnname'>try_write_headers</a>(&amp;mut self) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h4>
+<div class='docblock'><p>Write the Status-Line and headers of the response, if we have not already done so.</p>
+</div><h4 id='method.sendFile' class='method'><code>fn <a href='#method.sendFile' class='fnname'>sendFile</a>(&amp;mut self, filename: ~str)</code></h4>
+<div class='docblock'><p>Send a file by supplying the relative path from the applications public directory.
+i.e. if the public directory is /public and we call sendFile(~&quot;index.html&quot;)
+this would look for /public/index.html from the root project directory</p>
+</div><h4 id='method.write_headers' class='method'><code>fn <a href='#method.write_headers' class='fnname'>write_headers</a>(&amp;mut self) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h4>
+<div class='docblock'><p>Write the Status-Line and headers of the response, in preparation for writing the body.</p>
+
+<p>This also overrides the value of the Transfer-Encoding header
+(<code>self.headers.transfer_encoding</code>), ensuring it is <code>None</code> if the Content-Length header
+has been specified, or to <code>chunked</code> if it has not, thus switching to the chunked coding.</p>
+
+<p>If the headers have already been written, this will fail. See also <code>try_write_headers</code>.</p>
+</div><h4 id='method.finish_response' class='method'><code>fn <a href='#method.finish_response' class='fnname'>finish_response</a>(&amp;mut self) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='trait' href='http://static.rust-lang.org/doc/master/std/io/trait.Writer.html' title='std::io::Writer'>Writer</a> for <a class='struct' href='../../../http/server/response/struct.ResponseWriter.html' title='http::server::response::ResponseWriter'>ResponseWriter</a>&lt;'a&gt;</code></h3><div class='methods'><h4 id='method.write' class='method'><code>fn <a href='#method.write' class='fnname'>write</a>(&amp;mut self, buf: &amp;[u8]) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h4>
+<h4 id='method.flush' class='method'><code>fn <a href='#method.flush' class='fnname'>flush</a>(&amp;mut self) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&uarr;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&darr;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code> (or <code>str</code>), <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    <script>
+        var rootPath = "../../../";
+        var currentCrate = "http";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    <script async src="../../../search-index.js"></script>
+</body>
+</html>

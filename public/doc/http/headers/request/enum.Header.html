@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>http::headers::request::Header - Rust</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700|Inconsolata:400,700'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+
+    
+</head>
+<body>
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <section class="sidebar">
+        
+
+        <p class='location'><a href='../../index.html'>http</a>&#8203;::<a href='../index.html'>headers</a>&#8203;::<a href='index.html'>request</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.HeaderCollection.html'>HeaderCollection</a><br/><a class='struct ' href='struct.HeaderCollectionIterator.html'>HeaderCollectionIterator</a><br/></div><div class='block enum'><h2>Enums</h2><a class='enum current' href='enum.Header.html'>Header</a><br/></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <button class="do-search">Search</button>
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Search documentation..."
+                       type="search" />
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content enum"><a class='source'
+                              href='../../../src/http/rust-http-master/src/http/headers/mod.rs.html#880-883'>[src]</a><h1 class='fqn'>Enum <a href='../../index.html'>http</a>::<a href='../index.html'>headers</a>::<a href='index.html'>request</a>::<a class='enum' href=''>Header</a></h1><pre class='rust enum'>pub enum Header {
+    CacheControl(~str),
+    Connection(<a class='struct' href='http://static.rust-lang.org/doc/master/std/vec/struct.Vec.html' title='std::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../../http/headers/connection/enum.Connection.html' title='http::headers::connection::Connection'>Connection</a>&gt;),
+    Date(<a class='struct' href='http://static.rust-lang.org/doc/master/time/struct.Tm.html' title='time::Tm'>Tm</a>),
+    Pragma(~str),
+    Trailer(~str),
+    TransferEncoding(<a class='struct' href='http://static.rust-lang.org/doc/master/std/vec/struct.Vec.html' title='std::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../../http/headers/transfer_encoding/enum.TransferCoding.html' title='http::headers::transfer_encoding::TransferCoding'>TransferCoding</a>&gt;),
+    Upgrade(~str),
+    Via(~str),
+    Warning(~str),
+    Accept(~str),
+    AcceptCharset(~str),
+    AcceptEncoding(~str),
+    AcceptLanguage(~str),
+    Authorization(~str),
+    Expect(~str),
+    From(~str),
+    Host(<a class='struct' href='../../../http/headers/host/struct.Host.html' title='http::headers::host::Host'>Host</a>),
+    IfMatch(~str),
+    IfModifiedSince(<a class='struct' href='http://static.rust-lang.org/doc/master/time/struct.Tm.html' title='time::Tm'>Tm</a>),
+    IfNoneMatch(~str),
+    IfRange(~str),
+    IfUnmodifiedSince(<a class='struct' href='http://static.rust-lang.org/doc/master/time/struct.Tm.html' title='time::Tm'>Tm</a>),
+    MaxForwards(uint),
+    ProxyAuthorization(~str),
+    Range(~str),
+    Referer(~str),
+    Te(~str),
+    UserAgent(~str),
+    Allow(<a class='struct' href='http://static.rust-lang.org/doc/master/std/vec/struct.Vec.html' title='std::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../../http/method/enum.Method.html' title='http::method::Method'>Method</a>&gt;),
+    ContentEncoding(~str),
+    ContentLanguage(~str),
+    ContentLength(uint),
+    ContentLocation(~str),
+    ContentMd5(~str),
+    ContentRange(~str),
+    ContentType(<a class='struct' href='../../../http/headers/content_type/struct.MediaType.html' title='http::headers::content_type::MediaType'>MediaType</a>),
+    Expires(<a class='struct' href='http://static.rust-lang.org/doc/master/time/struct.Tm.html' title='time::Tm'>Tm</a>),
+    LastModified(<a class='struct' href='http://static.rust-lang.org/doc/master/time/struct.Tm.html' title='time::Tm'>Tm</a>),
+    ExtensionHeader(~str, ~str),
+}</pre><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.CacheControl'><code>CacheControl</code></td><td></td></tr><tr><td id='variant.Connection'><code>Connection</code></td><td></td></tr><tr><td id='variant.Date'><code>Date</code></td><td></td></tr><tr><td id='variant.Pragma'><code>Pragma</code></td><td></td></tr><tr><td id='variant.Trailer'><code>Trailer</code></td><td></td></tr><tr><td id='variant.TransferEncoding'><code>TransferEncoding</code></td><td></td></tr><tr><td id='variant.Upgrade'><code>Upgrade</code></td><td></td></tr><tr><td id='variant.Via'><code>Via</code></td><td></td></tr><tr><td id='variant.Warning'><code>Warning</code></td><td></td></tr><tr><td id='variant.Accept'><code>Accept</code></td><td></td></tr><tr><td id='variant.AcceptCharset'><code>AcceptCharset</code></td><td></td></tr><tr><td id='variant.AcceptEncoding'><code>AcceptEncoding</code></td><td></td></tr><tr><td id='variant.AcceptLanguage'><code>AcceptLanguage</code></td><td></td></tr><tr><td id='variant.Authorization'><code>Authorization</code></td><td></td></tr><tr><td id='variant.Expect'><code>Expect</code></td><td></td></tr><tr><td id='variant.From'><code>From</code></td><td></td></tr><tr><td id='variant.Host'><code>Host</code></td><td></td></tr><tr><td id='variant.IfMatch'><code>IfMatch</code></td><td></td></tr><tr><td id='variant.IfModifiedSince'><code>IfModifiedSince</code></td><td></td></tr><tr><td id='variant.IfNoneMatch'><code>IfNoneMatch</code></td><td></td></tr><tr><td id='variant.IfRange'><code>IfRange</code></td><td></td></tr><tr><td id='variant.IfUnmodifiedSince'><code>IfUnmodifiedSince</code></td><td></td></tr><tr><td id='variant.MaxForwards'><code>MaxForwards</code></td><td></td></tr><tr><td id='variant.ProxyAuthorization'><code>ProxyAuthorization</code></td><td></td></tr><tr><td id='variant.Range'><code>Range</code></td><td></td></tr><tr><td id='variant.Referer'><code>Referer</code></td><td></td></tr><tr><td id='variant.Te'><code>Te</code></td><td></td></tr><tr><td id='variant.UserAgent'><code>UserAgent</code></td><td></td></tr><tr><td id='variant.Allow'><code>Allow</code></td><td></td></tr><tr><td id='variant.ContentEncoding'><code>ContentEncoding</code></td><td></td></tr><tr><td id='variant.ContentLanguage'><code>ContentLanguage</code></td><td></td></tr><tr><td id='variant.ContentLength'><code>ContentLength</code></td><td></td></tr><tr><td id='variant.ContentLocation'><code>ContentLocation</code></td><td></td></tr><tr><td id='variant.ContentMd5'><code>ContentMd5</code></td><td></td></tr><tr><td id='variant.ContentRange'><code>ContentRange</code></td><td></td></tr><tr><td id='variant.ContentType'><code>ContentType</code></td><td></td></tr><tr><td id='variant.Expires'><code>Expires</code></td><td></td></tr><tr><td id='variant.LastModified'><code>LastModified</code></td><td></td></tr><tr><td id='variant.ExtensionHeader'><code>ExtensionHeader</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../../../http/headers/trait.HeaderEnum.html' title='http::headers::HeaderEnum'>HeaderEnum</a> for <a class='enum' href='../../../http/headers/request/enum.Header.html' title='http::headers::request::Header'>Header</a></code></h3><div class='methods'><h4 id='method.header_name' class='method'><code>fn <a href='#method.header_name' class='fnname'>header_name</a>(&amp;self) -&gt; ~str</code></h4>
+<h4 id='method.header_value' class='method'><code>fn <a href='#method.header_value' class='fnname'>header_value</a>(&amp;self) -&gt; ~str</code></h4>
+<h4 id='method.write_header' class='method'><code>fn <a href='#method.write_header' class='fnname'>write_header</a>&lt;W: <a class='trait' href='http://static.rust-lang.org/doc/master/std/io/trait.Writer.html' title='std::io::Writer'>Writer</a>&gt;(&amp;self, writer: &amp;mut W) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h4>
+<h4 id='method.value_from_stream' class='method'><code>fn <a href='#method.value_from_stream' class='fnname'>value_from_stream</a>&lt;R: <a class='trait' href='http://static.rust-lang.org/doc/master/std/io/trait.Reader.html' title='std::io::Reader'>Reader</a>&gt;(name: ~str, value: &amp;mut <a class='struct' href='../../../http/headers/struct.HeaderValueByteIterator.html' title='http::headers::HeaderValueByteIterator'>HeaderValueByteIterator</a>&lt;R&gt;) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='enum' href='../../../http/headers/request/enum.Header.html' title='http::headers::request::Header'>Header</a>&gt;</code></h4>
+<div class='docblock'><p>Return values:</p>
+
+<ul>
+<li>Header</li>
+<li>Next byte (consumed out of linear white space checking necessity)</li>
+</ul>
+
+<p>(Err, Option) means EOF/EOH/Malformed.
+(Ok, None) is impossible.
+(Ok, Some) means you have a valid header.</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&uarr;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&darr;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code> (or <code>str</code>), <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    <script>
+        var rootPath = "../../../";
+        var currentCrate = "http";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    <script async src="../../../search-index.js"></script>
+</body>
+</html>

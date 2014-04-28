@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>http::headers::request::HeaderCollection - Rust</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700|Inconsolata:400,700'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+
+    
+</head>
+<body>
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <section class="sidebar">
+        
+
+        <p class='location'><a href='../../index.html'>http</a>&#8203;::<a href='../index.html'>headers</a>&#8203;::<a href='index.html'>request</a></p><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.HeaderCollection.html'>HeaderCollection</a><br/><a class='struct ' href='struct.HeaderCollectionIterator.html'>HeaderCollectionIterator</a><br/></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.Header.html'>Header</a><br/></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <button class="do-search">Search</button>
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Search documentation..."
+                       type="search" />
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct"><a class='source'
+                              href='../../../src/http/headers/mod.rs.html#886-889'>[src]</a><h1 class='fqn'>Struct <a href='../../index.html'>http</a>::<a href='../index.html'>headers</a>::<a href='index.html'>request</a>::<a class='struct' href=''>HeaderCollection</a></h1><pre class='rust struct'>pub struct HeaderCollection {
+    pub cache_control: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub connection: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='struct' href='http://static.rust-lang.org/doc/master/std/vec/struct.Vec.html' title='std::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../../http/headers/connection/enum.Connection.html' title='http::headers::connection::Connection'>Connection</a>&gt;&gt;,
+    pub date: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='struct' href='http://static.rust-lang.org/doc/master/time/struct.Tm.html' title='time::Tm'>Tm</a>&gt;,
+    pub pragma: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub trailer: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub transfer_encoding: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='struct' href='http://static.rust-lang.org/doc/master/std/vec/struct.Vec.html' title='std::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../../http/headers/transfer_encoding/enum.TransferCoding.html' title='http::headers::transfer_encoding::TransferCoding'>TransferCoding</a>&gt;&gt;,
+    pub upgrade: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub via: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub warning: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub accept: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub accept_charset: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub accept_encoding: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub accept_language: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub authorization: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub expect: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub from: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub host: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='struct' href='../../../http/headers/host/struct.Host.html' title='http::headers::host::Host'>Host</a>&gt;,
+    pub if_match: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub if_modified_since: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='struct' href='http://static.rust-lang.org/doc/master/time/struct.Tm.html' title='time::Tm'>Tm</a>&gt;,
+    pub if_none_match: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub if_range: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub if_unmodified_since: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='struct' href='http://static.rust-lang.org/doc/master/time/struct.Tm.html' title='time::Tm'>Tm</a>&gt;,
+    pub max_forwards: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;uint&gt;,
+    pub proxy_authorization: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub range: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub referer: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub te: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub user_agent: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub allow: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='struct' href='http://static.rust-lang.org/doc/master/std/vec/struct.Vec.html' title='std::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../../http/method/enum.Method.html' title='http::method::Method'>Method</a>&gt;&gt;,
+    pub content_encoding: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub content_language: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub content_length: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;uint&gt;,
+    pub content_location: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub content_md5: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub content_range: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;,
+    pub content_type: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='struct' href='../../../http/headers/content_type/struct.MediaType.html' title='http::headers::content_type::MediaType'>MediaType</a>&gt;,
+    pub expires: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='struct' href='http://static.rust-lang.org/doc/master/time/struct.Tm.html' title='time::Tm'>Tm</a>&gt;,
+    pub last_modified: <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;<a class='struct' href='http://static.rust-lang.org/doc/master/time/struct.Tm.html' title='time::Tm'>Tm</a>&gt;,
+    pub extensions: <a class='struct' href='http://static.rust-lang.org/doc/master/collections/treemap/struct.TreeMap.html' title='collections::treemap::TreeMap'>TreeMap</a>&lt;~str, ~str&gt;,
+}</pre><h2 class='fields'>Fields</h2>
+<table><tr><td id='structfield.cache_control'><code>cache_control</code></td><td></td></tr><tr><td id='structfield.connection'><code>connection</code></td><td></td></tr><tr><td id='structfield.date'><code>date</code></td><td></td></tr><tr><td id='structfield.pragma'><code>pragma</code></td><td></td></tr><tr><td id='structfield.trailer'><code>trailer</code></td><td></td></tr><tr><td id='structfield.transfer_encoding'><code>transfer_encoding</code></td><td></td></tr><tr><td id='structfield.upgrade'><code>upgrade</code></td><td></td></tr><tr><td id='structfield.via'><code>via</code></td><td></td></tr><tr><td id='structfield.warning'><code>warning</code></td><td></td></tr><tr><td id='structfield.accept'><code>accept</code></td><td></td></tr><tr><td id='structfield.accept_charset'><code>accept_charset</code></td><td></td></tr><tr><td id='structfield.accept_encoding'><code>accept_encoding</code></td><td></td></tr><tr><td id='structfield.accept_language'><code>accept_language</code></td><td></td></tr><tr><td id='structfield.authorization'><code>authorization</code></td><td></td></tr><tr><td id='structfield.expect'><code>expect</code></td><td></td></tr><tr><td id='structfield.from'><code>from</code></td><td></td></tr><tr><td id='structfield.host'><code>host</code></td><td></td></tr><tr><td id='structfield.if_match'><code>if_match</code></td><td></td></tr><tr><td id='structfield.if_modified_since'><code>if_modified_since</code></td><td></td></tr><tr><td id='structfield.if_none_match'><code>if_none_match</code></td><td></td></tr><tr><td id='structfield.if_range'><code>if_range</code></td><td></td></tr><tr><td id='structfield.if_unmodified_since'><code>if_unmodified_since</code></td><td></td></tr><tr><td id='structfield.max_forwards'><code>max_forwards</code></td><td></td></tr><tr><td id='structfield.proxy_authorization'><code>proxy_authorization</code></td><td></td></tr><tr><td id='structfield.range'><code>range</code></td><td></td></tr><tr><td id='structfield.referer'><code>referer</code></td><td></td></tr><tr><td id='structfield.te'><code>te</code></td><td></td></tr><tr><td id='structfield.user_agent'><code>user_agent</code></td><td></td></tr><tr><td id='structfield.allow'><code>allow</code></td><td></td></tr><tr><td id='structfield.content_encoding'><code>content_encoding</code></td><td></td></tr><tr><td id='structfield.content_language'><code>content_language</code></td><td></td></tr><tr><td id='structfield.content_length'><code>content_length</code></td><td></td></tr><tr><td id='structfield.content_location'><code>content_location</code></td><td></td></tr><tr><td id='structfield.content_md5'><code>content_md5</code></td><td></td></tr><tr><td id='structfield.content_range'><code>content_range</code></td><td></td></tr><tr><td id='structfield.content_type'><code>content_type</code></td><td></td></tr><tr><td id='structfield.expires'><code>expires</code></td><td></td></tr><tr><td id='structfield.last_modified'><code>last_modified</code></td><td></td></tr><tr><td id='structfield.extensions'><code>extensions</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../../http/headers/request/struct.HeaderCollection.html' title='http::headers::request::HeaderCollection'>HeaderCollection</a></code></h3><div class='methods'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../../http/headers/request/struct.HeaderCollection.html' title='http::headers::request::HeaderCollection'>HeaderCollection</a></code></h4>
+<h4 id='method.get_header' class='method'><code>fn <a href='#method.get_header' class='fnname'>get_header</a>(&amp;mut self, key: ~str) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/option/enum.Option.html' title='std::option::Option'>Option</a>&lt;~str&gt;</code></h4>
+<h4 id='method.insert' class='method'><code>fn <a href='#method.insert' class='fnname'>insert</a>(&amp;mut self, header: <a class='enum' href='../../../http/headers/request/enum.Header.html' title='http::headers::request::Header'>Header</a>)</code></h4>
+<div class='docblock'><p>Consume a header, putting it into this structure.</p>
+</div><h4 id='method.iter' class='method'><code>fn <a href='#method.iter' class='fnname'>iter</a>&lt;'a&gt;(&amp;'a self) -&gt; <a class='struct' href='../../../http/headers/request/struct.HeaderCollectionIterator.html' title='http::headers::request::HeaderCollectionIterator'>HeaderCollectionIterator</a>&lt;'a&gt;</code></h4>
+<h4 id='method.write_all' class='method'><code>fn <a href='#method.write_all' class='fnname'>write_all</a>&lt;W: <a class='trait' href='http://static.rust-lang.org/doc/master/std/io/trait.Writer.html' title='std::io::Writer'>Writer</a>&gt;(&amp;self, writer: &amp;mut W) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/io/enum.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;()&gt;</code></h4>
+<div class='docblock'><p>Write all the headers to a writer. This includes an extra \r\n at the end to
+signal end of headers.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://static.rust-lang.org/doc/master/std/clone/trait.Clone.html' title='std::clone::Clone'>Clone</a> for <a class='struct' href='../../../http/headers/request/struct.HeaderCollection.html' title='http::headers::request::HeaderCollection'>HeaderCollection</a></code></h3><div class='methods'><h4 id='method.clone' class='method'><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../../http/headers/request/struct.HeaderCollection.html' title='http::headers::request::HeaderCollection'>HeaderCollection</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&uarr;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&darr;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code> (or <code>str</code>), <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    <script>
+        var rootPath = "../../../";
+        var currentCrate = "http";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    <script async src="../../../search-index.js"></script>
+</body>
+</html>

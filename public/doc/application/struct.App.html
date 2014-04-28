@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>application::App - Rust</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700|Inconsolata:400,700'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+</head>
+<body>
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <section class="sidebar">
+        
+
+        <p class='location'><a href='index.html'>application</a></p><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.App.html'>App</a><br/></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <button class="do-search">Search</button>
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Search documentation..."
+                       type="search" />
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct"><a class='source'
+                              href='../src/application/application.rs.html#34-53'>[src]</a><h1 class='fqn'>Struct <a href='index.html'>application</a>::<a class='struct' href=''>App</a></h1><pre class='rust struct'>pub struct App {
+    viewDirectory: <a class='struct' href='http://static.rust-lang.org/doc/master/std/path/posix/struct.Path.html' title='std::path::posix::Path'>Path</a>,
+    getRoutes: ~<a class='struct' href='http://static.rust-lang.org/doc/master/collections/hashmap/struct.HashMap.html' title='collections::hashmap::HashMap'>HashMap</a>&lt;~str, fn(&amp;<a class='struct' href='../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>, &amp;mut <a class='struct' href='../http/server/response/struct.ResponseWriter.html' title='http::server::response::ResponseWriter'>ResponseWriter</a>)&gt;,
+    putRoutes: ~<a class='struct' href='http://static.rust-lang.org/doc/master/collections/hashmap/struct.HashMap.html' title='collections::hashmap::HashMap'>HashMap</a>&lt;~str, fn(&amp;<a class='struct' href='../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>, &amp;mut <a class='struct' href='../http/server/response/struct.ResponseWriter.html' title='http::server::response::ResponseWriter'>ResponseWriter</a>)&gt;,
+    postRoutes: ~<a class='struct' href='http://static.rust-lang.org/doc/master/collections/hashmap/struct.HashMap.html' title='collections::hashmap::HashMap'>HashMap</a>&lt;~str, fn(&amp;<a class='struct' href='../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>, &amp;mut <a class='struct' href='../http/server/response/struct.ResponseWriter.html' title='http::server::response::ResponseWriter'>ResponseWriter</a>)&gt;,
+    delRoutes: ~<a class='struct' href='http://static.rust-lang.org/doc/master/collections/hashmap/struct.HashMap.html' title='collections::hashmap::HashMap'>HashMap</a>&lt;~str, fn(&amp;<a class='struct' href='../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>, &amp;mut <a class='struct' href='../http/server/response/struct.ResponseWriter.html' title='http::server::response::ResponseWriter'>ResponseWriter</a>)&gt;,
+    middlewareStack: ~<a class='struct' href='http://static.rust-lang.org/doc/master/std/vec/struct.Vec.html' title='std::vec::Vec'>Vec</a>&lt;fn(&amp;mut <a class='struct' href='../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>)&gt;,
+    port: u16,
+}</pre><div class='docblock'><p>The Application struct. The meat of the WD-42 Framework</p>
+</div><h2 class='fields'>Fields</h2>
+<table><tr><td id='structfield.viewDirectory'><code>viewDirectory</code></td><td><div class='docblock'><p>The root directory for your static files including html, css, and js files.</p>
+</div></td></tr><tr><td id='structfield.getRoutes'><code>getRoutes</code></td><td><div class='docblock'><p>The data structure to hold your get routes and get request handlers.
+Users should not interact with this directly and should use App::get() instead.</p>
+</div></td></tr><tr><td id='structfield.putRoutes'><code>putRoutes</code></td><td><div class='docblock'><p>The data structure to hold your put routes and put request handlers.
+Users should not interact with this directly and should use App::put() instead.</p>
+</div></td></tr><tr><td id='structfield.postRoutes'><code>postRoutes</code></td><td><div class='docblock'><p>The data structure to hold your post routes and post request handlers.
+Users should not interact with this directly and should use App::post() instead.</p>
+</div></td></tr><tr><td id='structfield.delRoutes'><code>delRoutes</code></td><td><div class='docblock'><p>The data structure to hold your del routes and del request handlers.
+Users should not interact with this directly and should use App::del() instead.</p>
+</div></td></tr><tr><td id='structfield.middlewareStack'><code>middlewareStack</code></td><td><div class='docblock'><p>The data structure to hold the applied middleware functions.  Add a function to this list using App::apply()</p>
+</div></td></tr><tr><td id='structfield.port'><code>port</code></td><td><div class='docblock'><p>The port that your server will be listening on</p>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../application/struct.App.html' title='application::App'>App</a></code></h3><div class='methods'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../application/struct.App.html' title='application::App'>App</a></code></h4>
+<div class='docblock'><p>Create a new Application.</p>
+</div><h4 id='method.setPort' class='method'><code>fn <a href='#method.setPort' class='fnname'>setPort</a>(&amp;mut self, new_port: u16)</code></h4>
+<div class='docblock'><p>Set the port to be listened on</p>
+</div><h4 id='method.listen' class='method'><code>fn <a href='#method.listen' class='fnname'>listen</a>(&amp;mut self, port: u16)</code></h4>
+<div class='docblock'><p>Supply a port to listen on and actually start the WD-42 server.</p>
+</div><h4 id='method.apply' class='method'><code>fn <a href='#method.apply' class='fnname'>apply</a>(&amp;mut self, f: fn(&amp;mut <a class='struct' href='../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>))</code></h4>
+<div class='docblock'><p>Add a middleware function to the middleware stack to be run on the
+Request objects before reaching your request handlers.</p>
+
+<p>This is often an ideal place to put authentication logic as well as
+light analytics tracking.</p>
+</div><h4 id='method.set_public_dir' class='method'><code>fn <a href='#method.set_public_dir' class='fnname'>set_public_dir</a>(&amp;mut self, path_to_dir: &amp;str)</code></h4>
+<div class='docblock'><p>Set the root public directory where you will place your html, css, and js files</p>
+</div><h4 id='method.get' class='method'><code>fn <a href='#method.get' class='fnname'>get</a>(&amp;mut self, route: ~str, f: fn(&amp;<a class='struct' href='../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>, &amp;mut <a class='struct' href='../http/server/response/struct.ResponseWriter.html' title='http::server::response::ResponseWriter'>ResponseWriter</a>))</code></h4>
+<div class='docblock'><p>Add a GET route and GET request handler for that route to the application.
+app.get(&quot;/&quot;, indexGet) will register the indexGet function to be called whenever
+the server sees a get request to the route &quot;/&quot;</p>
+</div><h4 id='method.post' class='method'><code>fn <a href='#method.post' class='fnname'>post</a>(&amp;mut self, route: ~str, f: fn(&amp;<a class='struct' href='../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>, &amp;mut <a class='struct' href='../http/server/response/struct.ResponseWriter.html' title='http::server::response::ResponseWriter'>ResponseWriter</a>))</code></h4>
+<div class='docblock'><p>The same as app.get() except for post requests</p>
+</div><h4 id='method.put' class='method'><code>fn <a href='#method.put' class='fnname'>put</a>(&amp;mut self, route: ~str, f: fn(&amp;<a class='struct' href='../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>, &amp;mut <a class='struct' href='../http/server/response/struct.ResponseWriter.html' title='http::server::response::ResponseWriter'>ResponseWriter</a>))</code></h4>
+<div class='docblock'><p>The same as app.get() except for put requests</p>
+</div><h4 id='method.del' class='method'><code>fn <a href='#method.del' class='fnname'>del</a>(&amp;mut self, route: ~str, f: fn(&amp;<a class='struct' href='../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>, &amp;mut <a class='struct' href='../http/server/response/struct.ResponseWriter.html' title='http::server::response::ResponseWriter'>ResponseWriter</a>))</code></h4>
+<div class='docblock'><p>The same as app.get() except for del requests</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../http/server/trait.Server.html' title='http::server::Server'>Server</a> for <a class='struct' href='../application/struct.App.html' title='application::App'>App</a></code></h3><div class='methods'><h4 id='method.get_config' class='method'><code>fn <a href='#method.get_config' class='fnname'>get_config</a>(&amp;self) -&gt; <a class='struct' href='../http/server/struct.Config.html' title='http::server::Config'>Config</a></code></h4>
+<h4 id='method.handle_request' class='method'><code>fn <a href='#method.handle_request' class='fnname'>handle_request</a>(&amp;self, r: &amp;mut <a class='struct' href='../http/server/request/struct.Request.html' title='http::server::request::Request'>Request</a>, w: &amp;mut <a class='struct' href='../http/server/response/struct.ResponseWriter.html' title='http::server::response::ResponseWriter'>ResponseWriter</a>)</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://static.rust-lang.org/doc/master/std/fmt/trait.Show.html' title='std::fmt::Show'>Show</a> for <a class='struct' href='../application/struct.App.html' title='application::App'>App</a></code></h3><div class='methods'><h4 id='method.fmt' class='method'><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://static.rust-lang.org/doc/master/std/fmt/struct.Formatter.html' title='std::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://static.rust-lang.org/doc/master/std/fmt/enum.Result.html' title='std::fmt::Result'>Result</a></code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://static.rust-lang.org/doc/master/std/clone/trait.Clone.html' title='std::clone::Clone'>Clone</a> for <a class='struct' href='../application/struct.App.html' title='application::App'>App</a></code></h3><div class='methods'><h4 id='method.clone' class='method'><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../application/struct.App.html' title='application::App'>App</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&uarr;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&darr;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code> (or <code>str</code>), <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    <script>
+        var rootPath = "../";
+        var currentCrate = "application";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script async src="../search-index.js"></script>
+</body>
+</html>
