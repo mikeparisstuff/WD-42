@@ -4,8 +4,8 @@ docs:
 
 all: docs
 	cd rust-http-master && make all
-	rustc -L rust-http-master/build rustic.rs
+	rustc -L rust-http-master/build server.rs
 
 run: all
-	./rustic
+	./server
 

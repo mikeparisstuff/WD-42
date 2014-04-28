@@ -16,7 +16,6 @@ fn indexGet(req: &Request, res: &mut ResponseWriter) {
     println!("Hello get!");
     res.status = Ok;
     res.sendFile(~"index.html");
-    // res.write(bytes!("Hello World!"));
 }
 fn indexPost(req: &Request, res: &mut ResponseWriter) {
     println!("Hello post!");
@@ -46,7 +45,6 @@ fn authenticate(req: &mut Request) {
         req.is_authenticated = false;
         println!("Request not authenticated");
     }
-
 }
 
 fn checkAuth(req: &mut Request) {

@@ -1,0 +1,6 @@
+PWD /Users/MichaelParis/uva/Spring 2014/OS/rustic
+INPUT /usr/local/texlive/2013/texmf.cnf
+INPUT /usr/local/texlive/2013/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2013/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT /Users/MichaelParis/uva/Spring 2014/OS/rustic/README.md
+OUTPUT /Users/MichaelParis/uva/Spring 2014/OS/rustic/README.log
