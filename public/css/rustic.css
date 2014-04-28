@@ -1,0 +1,14 @@
+
+.content {
+    margin-top: 100px;
+}
+
+.centered-text {
+    text-align: center;
+}
+
+.centered {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}

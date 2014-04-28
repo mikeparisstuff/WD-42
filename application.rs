@@ -132,7 +132,7 @@ impl Server for App {
                         None => ""
                     };
                     println!("Looking at extension: {}", extension);
-                    if ["js", "css"].contains(&extension) {
+                    if ["js", "css", "png", "jpg", "gif", "mp4"].contains(&extension) {
                         let path = p.clone();
                         w.sendFile(path.slice_from(1).to_owned());
                     } else {
@@ -185,9 +185,21 @@ impl Server for App {
 impl fmt::Show for App {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let mut printstr: ~str = format!("Rustic app running on port: {}", self.port);
-        printstr = printstr + "\n\tRoutes defined for: ";
+        printstr = printstr + "\n=================================\n\tRoutes defined for:\n=================================\nGET:";
         for (route, func) in self.getRoutes.iter() {
-            printstr = printstr + format!("\n\t{}", route);
+            printstr = printstr + format!("\n    |  {}", route);
+        }
+        printstr = printstr + "\n\nPOST:";
+        for (route, func) in self.postRoutes.iter() {
+            printstr = printstr + format!("\n    |  {}", route);
+        }
+        printstr = printstr + "\n\nPUT:";
+        for (route, func) in self.putRoutes.iter() {
+            printstr = printstr + format!("\n    |  {}", route);
+        }
+        printstr = printstr + "\n\nDELETE:";
+        for (route, func) in self.delRoutes.iter() {
+            printstr = printstr + format!("\n    |  {}", route);
         }
         write!(f.buf, "{}", printstr)
     }
