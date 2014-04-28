@@ -1,11 +1,11 @@
-WD-40
+WD-42
 ======
 
-Welcome to the WD-40 repo! WD-40 is a lightweight web framework that helps take the Rust off. 
+Welcome to the WD-42 repo! WD-42 is a lightweight web framework that helps take the Rust off. 
 
 
 ###Quick Start
-Once you have downloaded and installed **WD-40**, you simply need 5 lines of code to make your first endpoint, apply middleware, and launch your website!
+Once you have downloaded and installed **WD-42**, you simply need 5 lines of code to make your first endpoint, apply middleware, and launch your website!
 ```rust
 let mut app: application::App = application::App::new();
 app.set_public_dir(~"./public"); // Set your public folder to serve files from
@@ -23,7 +23,7 @@ fn indexGet(req: &Request, res: &mut ResponseWriter) {
 }
 ```
 
-WD-40 supports `GET`, `POST`, `PUT`, and `DELETE`. 
+WD-42 supports `GET`, `POST`, `PUT`, and `DELETE`. 
 ```rust
 app.get(path, fn);
 app.post(path, fn);
