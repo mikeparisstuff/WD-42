@@ -22,7 +22,7 @@ use collections::HashMap;
 #[deriving(Clone)]
 pub struct App {
 	// TODO: Change Request/Response objects to work with rust-http
-    viewDirectory: ~str,
+    viewDirectory: Path,
 	getRoutes: ~HashMap<~str, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)>,
     putRoutes: ~HashMap<~str, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)>,
     postRoutes: ~HashMap<~str, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)>,
@@ -34,7 +34,7 @@ pub struct App {
 impl App {
     pub fn new() -> App {
         App {
-            viewDirectory: os::getcwd().as_str().unwrap().clone().to_owned(),
+            viewDirectory: os::getcwd(),
             getRoutes: ~HashMap::new(),
             postRoutes: ~HashMap::new(),
             delRoutes: ~HashMap::new(),
@@ -69,15 +69,20 @@ impl App {
     /*
     *   Interface for user to send html and other files
     */
-    pub fn set_view_dir(&mut self, path_to_dir: &str) {
+    pub fn set_public_dir(&mut self, path_to_dir: &str) {
         println!("CWD: {}", os::getcwd().display());
-        // println!("Rel Path: {}", Path::new(path_to_dir).display());
-        let mut viewDir = Path::new(self.viewDirectory.clone());
-        viewDir.push(Path::new(path_to_dir));
-        self.viewDirectory = viewDir.as_str().unwrap().clone().to_owned();
-        // println!("Total path: {}", self.viewDirectory.display());
+        println!("Rel Path: {}", Path::new(path_to_dir).display());
+        self.viewDirectory.push(Path::new(path_to_dir));
+        println!("Total path: {}", self.viewDirectory.display());
     }
 
+    /*
+    *   Helper resource that looks for css and js files that may be requested
+    */
+    fn isPublicResource(self, resource_uri : &str) -> bool {
+        let path = self.viewDirectory.join(Path::new(resource_uri));
+        path.exists()
+    }
 
     /*
     *   Interface for user to connect functions to handle different HTTP methods at different endpoints
@@ -116,13 +121,23 @@ impl Server for App {
         match (&r.method, uri) {
             (&Get, AbsolutePath(p)) => {
                 println!("GET request to path: {}", p);
+                // let s = self.clone();
                 if  self.getRoutes.contains_key(&p) {
                     let v = self.getRoutes.get(&p);
                     // let f = v.get;
                     (*v)(r, w);
                 } else {
-                    w.status = MethodNotAllowed;
-
+                    let extension = match p.split('.').nth(1) {
+                        Some(ext) => ext,
+                        None => ""
+                    };
+                    println!("Looking at extension: {}", extension);
+                    if ["js", "css"].contains(&extension) {
+                        let path = p.clone();
+                        w.sendFile(path.slice_from(1).to_owned());
+                    } else {
+                        w.status = MethodNotAllowed;
+                    }
                 }
             },
             (&Post, AbsolutePath(p)) => {

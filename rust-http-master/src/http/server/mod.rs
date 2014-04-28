@@ -27,92 +27,151 @@ pub trait Server: Send + Clone {
     fn serve_forever(self) {
         let config = self.get_config();
         debug!("About to bind to {:?}", config.bind_address);
-        let mut acceptor = match TcpListener::bind(config.bind_address).listen() {
-            Err(err) => {
-                error!("bind or listen failed :-(: {}", err);
-                return;
-            },
-            Ok(acceptor) => acceptor,
-        };
+        // let mut acceptor = match TcpListener::bind(config.bind_address).listen() {
+        //     Err(err) => {
+        //         error!("bind or listen failed :-(: {}", err);
+        //         return;
+        //     },
+        //     Ok(acceptor) => acceptor,
+        // };
         debug!("listening");
-        let (perf_sender, perf_receiver) = channel();
+        // let (perf_sender, perf_receiver) = channel();
+        // spawn(proc() {
+        //     perf_dumper(perf_receiver);
+        // });
         spawn(proc() {
-            perf_dumper(perf_receiver);
+            let mut acceptor = TcpListener::bind(config.bind_address).listen();
+            for stream in acceptor.incoming() {
+                let time_start = precise_time_ns();
+                let child_self = self.clone();
+                let mut viewDir = config.viewDirectory.clone();
+                spawn(proc() {
+                    let mut time_start = time_start;
+                    let mut stream = BufferedStream::new(stream.unwrap());
+                    // loop {
+                        let (request, err_status) = Request::load(&mut stream);
+                        let mut response = ~ResponseWriter::new(&mut stream, request, viewDir);
+                        match err_status {
+                            Ok(()) => {
+                                child_self.handle_request(request, response);
+                                // Ensure that we actually do send a response:
+                                match response.try_write_headers() {
+                                    Err(err) => {
+                                        error!("Writing headers failed: {}", err);
+                                        return;  // Presumably bad connection, so give up.
+                                    },
+                                    Ok(_) => (),
+                                }
+                            },
+                            Err(status) => {
+                                // Uh oh, it's a response that I as a server cannot cope with.
+                                // No good user-agent should have caused this, so for the moment
+                                // at least I am content to send no body in the response.
+                                response.status = status;
+                                response.headers.content_length = Some(0);
+                                match response.write_headers() {
+                                    Err(err) => {
+                                        error!("Writing headers failed: {}", err);
+                                        return;  // Presumably bad connection, so give up.
+                                    },
+                                    Ok(_) => (),
+                                }
+                            },
+                        }
+                        // Ensure the request is flushed, any Transfer-Encoding completed, etc.
+                        match response.finish_response() {
+                            Err(err) => {
+                                error!("finishing response failed: {}", err);
+                                return;  // Presumably bad connection, so give up.
+                            },
+                            Ok(_) => (),
+                        }
+
+                        // THIS WAS BREAKING OUR SYSTEM. This loop never ended until we got a close connection
+                        // and if we didn't and made another request it would freak
+                        // if request.close_connection {
+                        //     break;
+                        // }
+                    // }
+                });
+            }
         });
-        loop {
-            let time_start = precise_time_ns();
-            let stream = match acceptor.accept() {
-                Err(error) => {
-                    debug!("accept failed: {:?}", error);
-                    // Question: is this the correct thing to do? We should probably be more
-                    // intelligent, for there are some accept failures that are likely to be
-                    // permanent, such that continuing would be a very bad idea, such as
-                    // ENOBUFS/ENOMEM; and some where it should just be ignored, e.g.
-                    // ECONNABORTED. TODO.
-                    continue;
-                },
-                Ok(socket) => socket,
-            };
-            let child_perf_sender = perf_sender.clone();
-            let child_self = self.clone();
-            let viewDir = config.viewDirectory.clone();
-            spawn(proc() {
-                let mut time_start = time_start;
-                let mut stream = BufferedStream::new(stream);
-                debug!("accepted connection, got {:?}", stream);
-                loop {  // A keep-alive loop, condition at end
-                    let time_spawned = precise_time_ns();
-                    let (request, err_status) = Request::load(&mut stream);
-                    let time_request_made = precise_time_ns();
-                    let mut response = ~ResponseWriter::new(&mut stream, request, viewDir);
-                    let time_response_made = precise_time_ns();
-                    match err_status {
-                        Ok(()) => {
-                            child_self.handle_request(request, response);
-                            // Ensure that we actually do send a response:
-                            match response.try_write_headers() {
-                                Err(err) => {
-                                    error!("Writing headers failed: {}", err);
-                                    return;  // Presumably bad connection, so give up.
-                                },
-                                Ok(_) => (),
-                            }
-                        },
-                        Err(status) => {
-                            // Uh oh, it's a response that I as a server cannot cope with.
-                            // No good user-agent should have caused this, so for the moment
-                            // at least I am content to send no body in the response.
-                            response.status = status;
-                            response.headers.content_length = Some(0);
-                            match response.write_headers() {
-                                Err(err) => {
-                                    error!("Writing headers failed: {}", err);
-                                    return;  // Presumably bad connection, so give up.
-                                },
-                                Ok(_) => (),
-                            }
-                        },
-                    }
-                    // Ensure the request is flushed, any Transfer-Encoding completed, etc.
-                    match response.finish_response() {
-                        Err(err) => {
-                            error!("finishing response failed: {}", err);
-                            return;  // Presumably bad connection, so give up.
-                        },
-                        Ok(_) => (),
-                    }
-                    let time_finished = precise_time_ns();
-                    child_perf_sender.send((time_start, time_spawned, time_request_made, time_response_made, time_finished));
 
-                    // Subsequent requests on this connection have no spawn time
-                    time_start = time_finished;
 
-                    if request.close_connection {
-                        break;
-                    }
-                }
-            });
-        }
+        // loop {
+        //     let time_start = precise_time_ns();
+        //     let stream = match acceptor.accept() {
+        //         Err(error) => {
+        //             debug!("accept failed: {:?}", error);
+        //             // Question: is this the correct thing to do? We should probably be more
+        //             // intelligent, for there are some accept failures that are likely to be
+        //             // permanent, such that continuing would be a very bad idea, such as
+        //             // ENOBUFS/ENOMEM; and some where it should just be ignored, e.g.
+        //             // ECONNABORTED. TODO.
+        //             continue;
+        //         },
+        //         Ok(socket) => socket,
+        //     };
+        //     let child_perf_sender = perf_sender.clone();
+        //     let child_self = self.clone();
+        //     let viewDir = config.viewDirectory.clone();
+        //     spawn(proc() {
+        //         let mut time_start = time_start;
+        //         let mut stream = BufferedStream::new(stream);
+        //         debug!("accepted connection, got {:?}", stream);
+        //         loop {  // A keep-alive loop, condition at end
+        //             let time_spawned = precise_time_ns();
+        //             let (request, err_status) = Request::load(&mut stream);
+        //             let time_request_made = precise_time_ns();
+        //             let mut response = ~ResponseWriter::new(&mut stream, request, viewDir);
+        //             let time_response_made = precise_time_ns();
+        //             match err_status {
+        //                 Ok(()) => {
+        //                     child_self.handle_request(request, response);
+        //                     // Ensure that we actually do send a response:
+        //                     match response.try_write_headers() {
+        //                         Err(err) => {
+        //                             error!("Writing headers failed: {}", err);
+        //                             return;  // Presumably bad connection, so give up.
+        //                         },
+        //                         Ok(_) => (),
+        //                     }
+        //                 },
+        //                 Err(status) => {
+        //                     // Uh oh, it's a response that I as a server cannot cope with.
+        //                     // No good user-agent should have caused this, so for the moment
+        //                     // at least I am content to send no body in the response.
+        //                     response.status = status;
+        //                     response.headers.content_length = Some(0);
+        //                     match response.write_headers() {
+        //                         Err(err) => {
+        //                             error!("Writing headers failed: {}", err);
+        //                             return;  // Presumably bad connection, so give up.
+        //                         },
+        //                         Ok(_) => (),
+        //                     }
+        //                 },
+        //             }
+        //             // Ensure the request is flushed, any Transfer-Encoding completed, etc.
+        //             match response.finish_response() {
+        //                 Err(err) => {
+        //                     error!("finishing response failed: {}", err);
+        //                     return;  // Presumably bad connection, so give up.
+        //                 },
+        //                 Ok(_) => (),
+        //             }
+        //             let time_finished = precise_time_ns();
+        //             child_perf_sender.send((time_start, time_spawned, time_request_made, time_response_made, time_finished));
+
+        //             // Subsequent requests on this connection have no spawn time
+        //             time_start = time_finished;
+
+        //             if request.close_connection {
+        //                 break;
+        //             }
+        //         }
+        //     });
+        // }
     }
 }
 
@@ -122,7 +181,7 @@ pub trait Server: Send + Clone {
 /// options may turn up later.
 pub struct Config {
 	pub bind_address: SocketAddr,
-    pub viewDirectory: ~str
+    pub viewDirectory: Path
 }
 
 static PERF_DUMP_FREQUENCY : u64 = 10_000;

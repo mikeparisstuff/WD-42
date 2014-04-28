@@ -51,7 +51,7 @@ fn main() {
         println!("This request is authenticated: {}", req.is_authenticated);
     }
 
-    app.set_view_dir(~"./public");
+    app.set_public_dir(~"./public");
 
     // fn indexPut(req: &Request, res: &mut ResponseWriter) {
     //     println!("Hello put!");
