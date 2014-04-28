@@ -6,6 +6,8 @@ extern crate http;
 use http::server::{Request, ResponseWriter};
 use http::status::{BadRequest, MethodNotAllowed, Ok};
 use std::io::println;
+use std::io::BufWriter;
+use std::io;
 use std::Vec;
 use collections::HashMap;
 mod application;
@@ -27,19 +29,21 @@ fn noFileGet(req: &Request, res: &mut ResponseWriter) {
 
 fn authenticate(req: &Request) {
     let allowedUsers : [~str, ..4] = [~"mlp5ab", ~"ag7bf", ~"bp5xj", ~"nal3vm"];
-    println!("Length of headers: {}", req.headers.extensions.len());
-    match req.headers.extensions.find(&~"Authorization") {
-        Some(user) => {
-            if allowedUsers.contains(user) {
-                println!("Successfully authenticated user: {}", user);
-            } else {
-                println!("Could not authenticate user: {}", user);
-            }
-        },
-        None => {
-            println("Could not find Authorization in headers");
-        }
+
+    let mut headers = req.headers.clone();
+    let mut value: ~str = match headers.get_header(~"Authorization") {
+        Some(value) => {value},
+        None => {~"THIS IS NOT A USER LOL"}
+    };
+    println!("Auth value: {}", value);
+    //TODO: change req.is_authenticated..
+    if allowedUsers.contains(&value) {
+        println!("User Authenticated");
     }
+    else {
+        println!("Request not authenticated");
+    }
+
 }
 
 fn checkAuth(req: &Request) {

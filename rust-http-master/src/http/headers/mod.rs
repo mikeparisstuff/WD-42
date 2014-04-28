@@ -896,11 +896,21 @@ macro_rules! headers_mod {
                     }
                 }
 
+                pub fn get_header(&mut self, key: ~str) -> Option<~str> {
+                    for header in self.iter() {
+                        if header.header_name() == key {
+                            return Some(header.header_value());
+                        }
+                    }
+                    return None;
+                }
+
                 /// Consume a header, putting it into this structure.
                 pub fn insert(&mut self, header: Header) {
                     match header {
                         $($caps_ident(value) => self.$lower_ident = Some(value),)*
-                        ExtensionHeader(key, value) => { self.extensions.insert(key, value); },
+                        ExtensionHeader(key, value) => { 
+                            self.extensions.insert(key, value); },
                     }
                 }
 
