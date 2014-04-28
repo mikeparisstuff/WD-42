@@ -201,6 +201,7 @@ fn test_read_request_line() {
 }
 
 /// An HTTP request sent to the server.
+#[deriving(Clone)]
 pub struct Request {
     /// The originating IP address of the request.
     pub remote_addr: Option<SocketAddr>,

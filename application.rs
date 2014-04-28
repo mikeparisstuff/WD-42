@@ -27,7 +27,7 @@ pub struct App {
     putRoutes: ~HashMap<~str, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)>,
     postRoutes: ~HashMap<~str, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)>,
     delRoutes: ~HashMap<~str, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>)>,
-    middlewareStack: ~Vec<fn(&http::server::request::Request)>,
+    middlewareStack: ~Vec<fn(&mut http::server::request::Request)>,
     port: u16
 }
 
@@ -62,7 +62,7 @@ impl App {
         s.serve_forever();
     }
 
-    pub fn apply(&mut self, f : fn(&http::server::request::Request)) {
+    pub fn apply(&mut self, f : fn(&mut http::server::request::Request)) {
         println!("Adding function to middleware");
         self.middlewareStack.push(f);
     }
@@ -109,7 +109,7 @@ impl Server for App {
         Config { bind_address: SocketAddr { ip: Ipv4Addr(127, 0, 0, 1), port: self.port }, viewDirectory: self.viewDirectory.clone()}
     }
 
-    fn handle_request(&self, r: &Request, w: &mut ResponseWriter) {
+    fn handle_request(&self, r: &mut Request, w: &mut ResponseWriter) {
         w.headers.date = Some(time::now_utc());
         w.headers.server = Some(~"Rustic Server Hold Mah Dick");
 

@@ -27,7 +27,7 @@ fn noFileGet(req: &Request, res: &mut ResponseWriter) {
     res.sendFile(~"nobedere.html");
 }
 
-fn authenticate(req: &Request) {
+fn authenticate(req: &mut Request) {
     let allowedUsers : [~str, ..4] = [~"mlp5ab", ~"ag7bf", ~"bp5xj", ~"nal3vm"];
 
     let mut headers = req.headers.clone();
@@ -36,17 +36,20 @@ fn authenticate(req: &Request) {
         None => {~"THIS IS NOT A USER LOL"}
     };
     println!("Auth value: {}", value);
+
     //TODO: change req.is_authenticated..
     if allowedUsers.contains(&value) {
+        req.is_authenticated = true;
         println!("User Authenticated");
     }
     else {
+        req.is_authenticated = false;
         println!("Request not authenticated");
     }
 
 }
 
-fn checkAuth(req: &Request) {
+fn checkAuth(req: &mut Request) {
     println!("This request is authenticated: {}", req.is_authenticated);
 }
 

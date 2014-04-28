@@ -14,7 +14,7 @@ pub mod request;
 pub mod response;
 
 pub trait Server: Send + Clone {
-	fn handle_request(&self, request: &Request, response: &mut ResponseWriter) -> ();
+	fn handle_request(&self, request: &mut Request, response: &mut ResponseWriter) -> ();
 
 	// XXX: this could also be implemented on the serve methods
 	fn get_config(&self) -> Config;
@@ -51,9 +51,10 @@ pub trait Server: Send + Clone {
                     // loop {
                         let (request, err_status) = Request::load(&mut stream);
                         let mut response = ~ResponseWriter::new(&mut stream, request, viewDir);
+                        let mut request_copy = request.clone();
                         match err_status {
                             Ok(()) => {
-                                child_self.handle_request(request, response);
+                                child_self.handle_request(request_copy, response);
                                 // Ensure that we actually do send a response:
                                 match response.try_write_headers() {
                                     Err(err) => {
