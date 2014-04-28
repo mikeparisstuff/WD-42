@@ -127,12 +127,8 @@ impl Server for App {
                     // let f = v.get;
                     (*v)(r, w);
                 } else {
-                    let extension = match p.split('.').nth(1) {
-                        Some(ext) => ext,
-                        None => ""
-                    };
-                    println!("Looking at extension: {}", extension);
-                    if ["js", "css", "png", "jpg", "gif", "mp4"].contains(&extension) {
+                    let path : Path = self.viewDirectory.clone().join(Path::new(p.slice_from(1)));
+                    if path.exists() {
                         let path = p.clone();
                         w.sendFile(path.slice_from(1).to_owned());
                     } else {
