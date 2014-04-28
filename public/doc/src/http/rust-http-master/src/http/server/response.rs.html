@@ -259,18 +259,18 @@
     <span class='doccomment'>/// Send a file by supplying the relative path from the applications public directory.
 </span>    <span class='doccomment'>/// i.e. if the public directory is /public and we call sendFile(~&quot;index.html&quot;)
 </span>    <span class='doccomment'>/// this would look for /public/index.html from the root project directory
-</span>    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>sendFile</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>filename</span> : <span class='kw-2'>~</span><span class='ident'>str</span>) {
-        <span class='ident'>println</span>(<span class='string'>&quot;In Send File&quot;</span>);
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>path_to_file</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>viewDirectory</span>.<span class='ident'>clone</span>();
-        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Looking at path before push: {}&quot;</span>, <span class='ident'>path_to_file</span>.<span class='ident'>display</span>());
-        <span class='ident'>path_to_file</span>.<span class='ident'>push</span>(<span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='ident'>filename</span>));
-        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Checking if file exists at path: {}&quot;</span>, <span class='ident'>path_to_file</span>.<span class='ident'>display</span>());
-        <span class='kw'>if</span> <span class='ident'>path_to_file</span>.<span class='ident'>exists</span>() {
-            <span class='ident'>println</span>(<span class='string'>&quot;File Exists&quot;</span>);
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file_reader</span><span class='op'>=</span> <span class='ident'>File</span>::<span class='ident'>open_mode</span>(<span class='kw-2'>&amp;</span><span class='ident'>path_to_file</span>, <span class='ident'>Open</span>, <span class='ident'>Read</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
-            <span class='kw'>let</span> <span class='ident'>filesize</span> <span class='op'>=</span> <span class='ident'>path_to_file</span>.<span class='ident'>stat</span>().<span class='ident'>ok</span>().<span class='ident'>unwrap</span>().<span class='ident'>size</span>;
-            <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Opening file of size: {}&quot;</span>, <span class='ident'>filesize</span>);
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>remaining_bytes</span> <span class='op'>=</span> <span class='ident'>filesize</span> <span class='kw'>as</span> <span class='ident'>uint</span>;
+</span>    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>sendFile</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>filename</span> : <span class='kw-2'>~</span><span class='ident'>str</span>) {<span class='comment'>
+        // println(&quot;In Send File&quot;);
+        </span><span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>path_to_file</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>viewDirectory</span>.<span class='ident'>clone</span>();<span class='comment'>
+        // println!(&quot;Looking at path before push: {}&quot;, path_to_file.display());
+        </span><span class='ident'>path_to_file</span>.<span class='ident'>push</span>(<span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='ident'>filename</span>));<span class='comment'>
+        // println!(&quot;Checking if file exists at path: {}&quot;, path_to_file.display());
+        </span><span class='kw'>if</span> <span class='ident'>path_to_file</span>.<span class='ident'>exists</span>() {<span class='comment'>
+            // println(&quot;File Exists&quot;);
+            </span><span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file_reader</span><span class='op'>=</span> <span class='ident'>File</span>::<span class='ident'>open_mode</span>(<span class='kw-2'>&amp;</span><span class='ident'>path_to_file</span>, <span class='ident'>Open</span>, <span class='ident'>Read</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
+            <span class='kw'>let</span> <span class='ident'>filesize</span> <span class='op'>=</span> <span class='ident'>path_to_file</span>.<span class='ident'>stat</span>().<span class='ident'>ok</span>().<span class='ident'>unwrap</span>().<span class='ident'>size</span>;<span class='comment'>
+            // println!(&quot;Opening file of size: {}&quot;, filesize);
+            </span><span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>remaining_bytes</span> <span class='op'>=</span> <span class='ident'>filesize</span> <span class='kw'>as</span> <span class='ident'>uint</span>;
             <span class='kw'>while</span> (<span class='ident'>remaining_bytes</span> <span class='op'>&gt;=</span> <span class='number'>1024</span>) {
                 <span class='kw'>let</span> <span class='ident'>bytes</span> <span class='op'>=</span> <span class='ident'>file_reader</span>.<span class='ident'>read_exact</span>(<span class='number'>1024</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
                 <span class='self'>self</span>.<span class='ident'>write</span>(<span class='ident'>bytes</span>);
@@ -280,9 +280,9 @@
         } <span class='kw'>else</span> {
             <span class='ident'>println</span>(<span class='string'>&quot;File does not exist&quot;</span>);
             <span class='self'>self</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='ident'>status</span>::<span class='ident'>InternalServerError</span>;
-            <span class='self'>self</span>.<span class='ident'>write</span>(<span class='macro'>bytes</span><span class='macro'>!</span>(<span class='string'>&quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;404 Page Not Found&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>));
-            <span class='ident'>println</span>(<span class='string'>&quot;Send error&quot;</span>);
-        }
+            <span class='self'>self</span>.<span class='ident'>write</span>(<span class='macro'>bytes</span><span class='macro'>!</span>(<span class='string'>&quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;404 Page Not Found&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>));<span class='comment'>
+            // println(&quot;Send error&quot;);
+        </span>}
     }
 
     <span class='doccomment'>/// Write the Status-Line and headers of the response, in preparation for writing the body.

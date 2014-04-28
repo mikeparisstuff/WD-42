@@ -85,17 +85,14 @@ impl App {
     /// This is often an ideal place to put authentication logic as well as
     /// light analytics tracking.
     pub fn apply(&mut self, f : fn(&mut http::server::request::Request)) {
-        println!("Adding function to middleware");
         self.middlewareStack.push(f);
     }
 
 
     /// Set the root public directory where you will place your html, css, and js files
     pub fn set_public_dir(&mut self, path_to_dir: &str) {
-        println!("CWD: {}", os::getcwd().display());
-        println!("Rel Path: {}", Path::new(path_to_dir).display());
         self.viewDirectory.push(Path::new(path_to_dir));
-        println!("Total path: {}", self.viewDirectory.display());
+        println!("Setting public directory to: {}", self.viewDirectory.display());
     }
 
     /// Add a GET route and GET request handler for that route to the application.
@@ -128,7 +125,7 @@ impl Server for App {
 
     fn handle_request(&self, r: &mut Request, w: &mut ResponseWriter) {
         w.headers.date = Some(time::now_utc());
-        w.headers.server = Some(~"Rustic Server Hold Mah Dick");
+        w.headers.server = Some(~"WD-42 Server");
 
         for mw in self.middlewareStack.iter() {
             (*mw)(r);

@@ -65,16 +65,16 @@ impl<'a> ResponseWriter<'a> {
     /// i.e. if the public directory is /public and we call sendFile(~"index.html")
     /// this would look for /public/index.html from the root project directory
     pub fn sendFile(&mut self, filename : ~str) {
-        println("In Send File");
+        // println("In Send File");
         let mut path_to_file = self.viewDirectory.clone();
-        println!("Looking at path before push: {}", path_to_file.display());
+        // println!("Looking at path before push: {}", path_to_file.display());
         path_to_file.push(Path::new(filename));
-        println!("Checking if file exists at path: {}", path_to_file.display());
+        // println!("Checking if file exists at path: {}", path_to_file.display());
         if path_to_file.exists() {
-            println("File Exists");
+            // println("File Exists");
             let mut file_reader= File::open_mode(&path_to_file, Open, Read).ok().unwrap();
             let filesize = path_to_file.stat().ok().unwrap().size;
-            println!("Opening file of size: {}", filesize);
+            // println!("Opening file of size: {}", filesize);
             let mut remaining_bytes = filesize as uint;
             while (remaining_bytes >= 1024) {
                 let bytes = file_reader.read_exact(1024).ok().unwrap();
@@ -86,7 +86,7 @@ impl<'a> ResponseWriter<'a> {
             println("File does not exist");
             self.status = status::InternalServerError;
             self.write(bytes!("<html><body><h1>404 Page Not Found</h1></body></html>"));
-            println("Send error");
+            // println("Send error");
         }
     }
 

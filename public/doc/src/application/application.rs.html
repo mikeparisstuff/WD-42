@@ -257,9 +257,6 @@
 <span id='219'>219</span>
 <span id='220'>220</span>
 <span id='221'>221</span>
-<span id='222'>222</span>
-<span id='223'>223</span>
-<span id='224'>224</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_id</span> <span class='op'>=</span> <span class='string'>&quot;application&quot;</span>]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_type</span><span class='op'>=</span><span class='string'>&quot;lib&quot;</span>]</span>
@@ -348,17 +345,14 @@
 </span>    <span class='doccomment'>/// This is often an ideal place to put authentication logic as well as
 </span>    <span class='doccomment'>/// light analytics tracking.
 </span>    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>apply</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>f</span> : <span class='kw'>fn</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>http</span>::<span class='ident'>server</span>::<span class='ident'>request</span>::<span class='ident'>Request</span>)) {
-        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Adding function to middleware&quot;</span>);
         <span class='self'>self</span>.<span class='ident'>middlewareStack</span>.<span class='ident'>push</span>(<span class='ident'>f</span>);
     }
 
 
     <span class='doccomment'>/// Set the root public directory where you will place your html, css, and js files
 </span>    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_public_dir</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>path_to_dir</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) {
-        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;CWD: {}&quot;</span>, <span class='ident'>os</span>::<span class='ident'>getcwd</span>().<span class='ident'>display</span>());
-        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Rel Path: {}&quot;</span>, <span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='ident'>path_to_dir</span>).<span class='ident'>display</span>());
         <span class='self'>self</span>.<span class='ident'>viewDirectory</span>.<span class='ident'>push</span>(<span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='ident'>path_to_dir</span>));
-        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Total path: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>viewDirectory</span>.<span class='ident'>display</span>());
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Setting public directory to: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>viewDirectory</span>.<span class='ident'>display</span>());
     }
 
     <span class='doccomment'>/// Add a GET route and GET request handler for that route to the application.
@@ -391,7 +385,7 @@
 
     <span class='kw'>fn</span> <span class='ident'>handle_request</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>r</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>, <span class='ident'>w</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ResponseWriter</span>) {
         <span class='ident'>w</span>.<span class='ident'>headers</span>.<span class='ident'>date</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>time</span>::<span class='ident'>now_utc</span>());
-        <span class='ident'>w</span>.<span class='ident'>headers</span>.<span class='ident'>server</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>~</span><span class='string'>&quot;Rustic Server Hold Mah Dick&quot;</span>);
+        <span class='ident'>w</span>.<span class='ident'>headers</span>.<span class='ident'>server</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>~</span><span class='string'>&quot;WD-42 Server&quot;</span>);
 
         <span class='kw'>for</span> <span class='ident'>mw</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>middlewareStack</span>.<span class='ident'>iter</span>() {
             (<span class='op'>*</span><span class='ident'>mw</span>)(<span class='ident'>r</span>);
