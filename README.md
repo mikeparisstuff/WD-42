@@ -1,4 +1,4 @@
-#WD-42
+#WD-42 - The lightweight Web Framework for Rust
 ------
 
 Welcome to the WD-42 repo! WD-42 is a lightweight web framework that helps take the Rust off.
@@ -6,9 +6,11 @@ Welcome to the WD-42 repo! WD-42 is a lightweight web framework that helps take 
 ##WD-42 Breakdown
 WD-42 is broken into two main parts.
 
-1) The WD-42 Application found in application.rs: Most user interaction with this framework is done by interacting with and instance of this application.
+1) The WD-42 Application found in application.rs
+    * Most user interaction with this framework is done by interacting with an instance of this application.
 
-2) Rust-Http: A library created by Chris Morgan that we have extended for our own purposes.
+2) Rust-Http
+    * A library created by Chris Morgan that we have extended for our own purposes.
 
 ##Quick Start
 
@@ -47,8 +49,18 @@ Your public folder should be the place where you load all your html, css, images
 
 WD-42 supports `GET`, `POST`, `PUT`, and `DELETE`.
 ```rust
-app.get(path, fn);
-app.post(path, fn);
-app.put(path, fn);
-app.delete(path, fn);
+app.get(path, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>));
+app.post(path, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>));
+app.put(path, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>));
+app.delete(path, fn(&http::server::request::Request, &mut http::server::response::ResponseWriter<>));
 ```
+
+WD-42 supports arbitrary middleware as long as it has the following signature.
+```rust
+fn(&mut http::server::request::Request)
+```
+
+###Contribution
+If you would like to add features and/or make changes to this repo please feel free to fork it and submit pull requests.  We  are aware that the rust-http package is going to be phased out for a better solution in the future and thus this project will likely undergo large, non-backwards compatible changes in the future.
+
+Good Hacking!
