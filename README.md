@@ -7,9 +7,11 @@ Welcome to the WD-42 repo! WD-42 is a lightweight web framework that helps take 
 WD-42 is broken into two main parts.
 
 1) The WD-42 Application found in application.rs
+
     * Most user interaction with this framework is done by interacting with an instance of this application.
 
 2) Rust-Http
+
     * A library created by Chris Morgan that we have extended for our own purposes.
 
 ##Quick Start
