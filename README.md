@@ -62,6 +62,38 @@ WD-42 supports arbitrary middleware as long as it has the following signature.
 fn(&mut http::server::request::Request)
 ```
 
+##JSON Serialization
+Rust comes packaged with a json serializer that we can use to serialize our structs to pass over the network. Doing this is simple and requires you to simply implement a single **ToJson** Trait for your struct.
+
+For Example:
+```rust
+// Define a struct
+struct PayloadExample {
+    first_name: ~str,
+    last_name: ~str,
+}
+
+// Define the ToJson Trait on this struct
+impl ToJson for PayloadExample {
+    fn to_json( &self ) -> json::Json {
+        let mut d = ~TreeMap::new();
+        d.insert("first_name".to_owned(), self.first_name.to_json());
+        d.insert("last_name".to_owned(), self.last_name.to_json());
+        json::Object(d)
+    }
+}
+
+// And then serializing the struct is as simple as
+fn encodeGet(req: &Request, res: &mut ResponseWriter) {
+    let payload : PayloadExample = PayloadExample { first_name: ~"Johnny", last_name: ~"Bravo" };
+    let pljson : ~str = payload.to_json().to_str();
+    res.write(pljson.as_bytes());
+}
+
+// You can then register this fn as a request handler using app.get() to see the result
+app.get(~"/encode", encodeGet);
+```
+
 ###Contribution
 If you would like to add features and/or make changes to this repo please feel free to fork it and submit pull requests.  We  are aware that the rust-http package is going to be phased out for a better solution in the future and thus this project will likely undergo large, non-backwards compatible changes in the future.
 
