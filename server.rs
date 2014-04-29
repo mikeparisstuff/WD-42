@@ -80,8 +80,6 @@ fn main() {
 
     let mut app: application::App = application::App::new();
 
-    // TODO: Use actual request and response objects
-
     app.set_public_dir(~"./public");
 
     app.get(~"/", indexGet);
