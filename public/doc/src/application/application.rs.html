@@ -394,7 +394,7 @@
         <span class='kw'>let</span> <span class='ident'>uri</span> <span class='op'>=</span> <span class='ident'>r</span>.<span class='ident'>request_uri</span>.<span class='ident'>clone</span>();
         <span class='kw'>match</span> (<span class='kw-2'>&amp;</span><span class='ident'>r</span>.<span class='ident'>method</span>, <span class='ident'>uri</span>) {
             (<span class='kw-2'>&amp;</span><span class='ident'>Get</span>, <span class='ident'>AbsolutePath</span>(<span class='ident'>p</span>)) <span class='op'>=&gt;</span> {
-                <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;GET request to path: {}&quot;</span>, <span class='ident'>p</span>);<span class='comment'>
+                <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;\nGET request to path: {}&quot;</span>, <span class='ident'>p</span>);<span class='comment'>
                 // let s = self.clone();
                 </span><span class='kw'>if</span>  <span class='self'>self</span>.<span class='ident'>getRoutes</span>.<span class='ident'>contains_key</span>(<span class='kw-2'>&amp;</span><span class='ident'>p</span>) {
                     <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>getRoutes</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='ident'>p</span>);<span class='comment'>
@@ -413,7 +413,7 @@
             },
             (<span class='kw-2'>&amp;</span><span class='ident'>Post</span>, <span class='ident'>AbsolutePath</span>(<span class='ident'>p</span>)) <span class='op'>=&gt;</span> {
                 <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>postRoutes</span>.<span class='ident'>contains_key</span>(<span class='kw-2'>&amp;</span><span class='ident'>p</span>) {
-                    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;POST request to path&quot;</span>);
+                    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;\nPOST request to path&quot;</span>);
                     <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>postRoutes</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='ident'>p</span>);<span class='comment'>
                     // let f = v.get;
                     </span>(<span class='op'>*</span><span class='ident'>v</span>)(<span class='ident'>r</span>, <span class='ident'>w</span>);
@@ -424,7 +424,7 @@
             },
             (<span class='kw-2'>&amp;</span><span class='ident'>Put</span>, <span class='ident'>AbsolutePath</span>(<span class='ident'>p</span>)) <span class='op'>=&gt;</span> {
                 <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>putRoutes</span>.<span class='ident'>contains_key</span>(<span class='kw-2'>&amp;</span><span class='ident'>p</span>) {
-                    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;PUT request to path&quot;</span>);
+                    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;\nPUT request to path&quot;</span>);
                     <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>putRoutes</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='ident'>p</span>);<span class='comment'>
                     // let f = v.get;
                     </span>(<span class='op'>*</span><span class='ident'>v</span>)(<span class='ident'>r</span>, <span class='ident'>w</span>);
@@ -435,7 +435,7 @@
             },
             (<span class='kw-2'>&amp;</span><span class='ident'>Delete</span>, <span class='ident'>AbsolutePath</span>(<span class='ident'>p</span>)) <span class='op'>=&gt;</span> {
                 <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>delRoutes</span>.<span class='ident'>contains_key</span>(<span class='kw-2'>&amp;</span><span class='ident'>p</span>) {
-                    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;DELETE request to path&quot;</span>);
+                    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;\nDELETE request to path&quot;</span>);
                     <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>delRoutes</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='ident'>p</span>);<span class='comment'>
                     // let f = v.get;
                     </span>(<span class='op'>*</span><span class='ident'>v</span>)(<span class='ident'>r</span>, <span class='ident'>w</span>);

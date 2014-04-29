@@ -134,7 +134,7 @@ impl Server for App {
         let uri = r.request_uri.clone();
         match (&r.method, uri) {
             (&Get, AbsolutePath(p)) => {
-                println!("GET request to path: {}", p);
+                println!("\nGET request to path: {}", p);
                 // let s = self.clone();
                 if  self.getRoutes.contains_key(&p) {
                     let v = self.getRoutes.get(&p);
@@ -153,7 +153,7 @@ impl Server for App {
             },
             (&Post, AbsolutePath(p)) => {
                 if self.postRoutes.contains_key(&p) {
-                    println!("POST request to path");
+                    println!("\nPOST request to path");
                     let v = self.postRoutes.get(&p);
                     // let f = v.get;
                     (*v)(r, w);
@@ -164,7 +164,7 @@ impl Server for App {
             },
             (&Put, AbsolutePath(p)) => {
                 if self.putRoutes.contains_key(&p) {
-                    println!("PUT request to path");
+                    println!("\nPUT request to path");
                     let v = self.putRoutes.get(&p);
                     // let f = v.get;
                     (*v)(r, w);
@@ -175,7 +175,7 @@ impl Server for App {
             },
             (&Delete, AbsolutePath(p)) => {
                 if self.delRoutes.contains_key(&p) {
-                    println!("DELETE request to path");
+                    println!("\nDELETE request to path");
                     let v = self.delRoutes.get(&p);
                     // let f = v.get;
                     (*v)(r, w);
