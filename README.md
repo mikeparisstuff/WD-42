@@ -1,6 +1,8 @@
 ##WD-42 - The lightweight Web Framework for Rust
 ------
 
+NOTE: This was desined for Rust .10 and will most likely need some tinkering for more recent rust versions. I hope to get back to this project soon!
+
 Welcome to the WD-42 repo! WD-42 is a lightweight web framework that helps take the Rust off.
 
 ##WD-42 Breakdown
