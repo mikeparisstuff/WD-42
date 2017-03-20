@@ -1,11 +1,11 @@
-##WD-42 - The lightweight Web Framework for Rust
+# WD-42 - The lightweight Web Framework for Rust
 ------
 
 NOTE: This was desined for Rust .10 and will most likely need some tinkering to be compatible with more recent rust versions
 
 Welcome to the WD-42 repo! WD-42 is a lightweight web framework that helps take the Rust off.
 
-##WD-42 Breakdown
+## WD-42 Breakdown
 WD-42 is broken into two main parts.
 
 1) The WD-42 Application found in application.rs
@@ -16,7 +16,7 @@ WD-42 is broken into two main parts.
 
    * A library created by Chris Morgan that we have extended for our own purposes.
 
-##Quick Start
+## Quick Start
 
 To download WD-42 simply clone or download the zip file for this repo and run **make run** within the root project directory.  This should compile and start the example site within server.rs. By default the makefile looks for the file 'server.rs' to hold the user level application, but you can change this behavior in the Makefile.
 
@@ -64,7 +64,7 @@ WD-42 supports arbitrary middleware as long as it has the following signature.
 fn(&mut http::server::request::Request)
 ```
 
-##JSON Serialization
+## JSON Serialization
 Rust comes packaged with a json serializer that we can use to serialize our structs to pass over the network. Doing this is simple and requires you to simply implement a single **ToJson** Trait for your struct.
 
 For Example:
@@ -96,7 +96,7 @@ fn encodeGet(req: &Request, res: &mut ResponseWriter) {
 app.get(~"/encode", encodeGet);
 ```
 
-###Contribution
+### Contribution
 If you would like to add features and/or make changes to this repo please feel free to fork it and submit pull requests.  We  are aware that the rust-http package is going to be phased out for a better solution in the future and thus this project will likely undergo large, non-backwards compatible changes in the future.
 
 Good Hacking!
